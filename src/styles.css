@@ -1,0 +1,251 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * The Scented Space — Luxury Ritual House
+ * Warm, editorial, African-rooted.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand tokens */
+  --color-ivory: var(--ivory);
+  --color-cream: var(--cream);
+  --color-brown: var(--brown);
+  --color-terracotta: var(--terracotta);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-ink: var(--ink);
+
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Brand palette — extracted from the Scented Space wordmark */
+  --ivory: oklch(0.962 0.018 80);          /* #F8F3EA */
+  --cream: oklch(0.916 0.034 75);          /* #EFE3D1 */
+  --brown: oklch(0.292 0.095 32);          /* #5C1F12  oxblood logo bg */
+  --terracotta: oklch(0.392 0.118 35);     /* #7A2F16  warm accent */
+  --gold: oklch(0.685 0.085 52);           /* #C18A5D  rose-gold leaf */
+  --gold-soft: oklch(0.78 0.07 58);        /* #D9A878  highlight */
+  --ink: oklch(0.222 0.046 40);            /* #2A1B14 */
+
+  /* Semantic */
+  --background: var(--ivory);
+  --foreground: var(--ink);
+  --card: oklch(0.978 0.012 80);
+  --card-foreground: var(--ink);
+  --popover: var(--ivory);
+  --popover-foreground: var(--ink);
+  --primary: var(--terracotta);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--cream);
+  --secondary-foreground: var(--brown);
+  --muted: var(--cream);
+  --muted-foreground: oklch(0.48 0.04 40);
+  --accent: var(--gold);
+  --accent-foreground: var(--brown);
+  --destructive: oklch(0.55 0.18 28);
+  --destructive-foreground: var(--ivory);
+  --border: oklch(0.86 0.022 70);
+  --input: oklch(0.86 0.022 70);
+  --ring: var(--gold);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--terracotta);
+    color: var(--ivory);
+  }
+}
+
+/* Editorial utilities */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--brown);
+}
+
+@utility hairline {
+  display: inline-block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--gold);
+  vertical-align: middle;
+}
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.75rem, 8vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+@utility serif-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+}
+
+@utility link-underline {
+  position: relative;
+}
+@utility grain-overlay {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(74,36,21,0.05) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+  }
+}
+
+/* Editorial image framing — gives plain product images a curated,
+   printed-page feel: an offset gold outline peeking behind the
+   image, inner corner ticks, a soft printed vignette, and a subtle
+   grain pass over the photo. */
+@utility editorial-frame {
+  position: relative;
+  box-shadow:
+    7px 7px 0 -1px var(--ivory),
+    7px 7px 0 0 color-mix(in oklab, var(--gold) 38%, transparent);
+  transition: box-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .editorial-frame,
+.editorial-frame:hover {
+  box-shadow:
+    12px 12px 0 -1px var(--ivory),
+    12px 12px 0 0 color-mix(in oklab, var(--gold) 60%, transparent);
+}
+
+@utility editorial-frame-cream {
+  position: relative;
+  box-shadow:
+    7px 7px 0 -1px var(--cream),
+    7px 7px 0 0 color-mix(in oklab, var(--gold) 38%, transparent);
+  transition: box-shadow 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .editorial-frame-cream,
+.editorial-frame-cream:hover {
+  box-shadow:
+    12px 12px 0 -1px var(--cream),
+    12px 12px 0 0 color-mix(in oklab, var(--gold) 60%, transparent);
+}
+
+/* Inner ivory corner ticks — sit inside an overflow-hidden image
+   container above the photo. Pair with editorial-frame. */
+@utility corner-ticks {
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.85;
+    transition: opacity 500ms ease, width 500ms ease, height 500ms ease;
+  }
+  &::before {
+    top: 10px;
+    left: 10px;
+    border-top: 1px solid var(--ivory);
+    border-left: 1px solid var(--ivory);
+  }
+  &::after {
+    bottom: 10px;
+    right: 10px;
+    border-bottom: 1px solid var(--ivory);
+    border-right: 1px solid var(--ivory);
+  }
+}
+.group:hover .corner-ticks::before,
+.group:hover .corner-ticks::after {
+  width: 22px;
+  height: 22px;
+  opacity: 1;
+}
+
+/* Soft printed vignette — adds depth so images feel printed,
+   not stamped on. Sits above the photo, below text overlays. */
+@utility image-vignette {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(38, 18, 10, 0.18) 100%),
+      radial-gradient(rgba(248, 243, 234, 0.04) 1px, transparent 1px);
+    background-size: auto, 3px 3px;
+  }
+}
