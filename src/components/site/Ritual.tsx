@@ -7,7 +7,7 @@ import moistureImg from "@/assets/product-velvet.jpg";
 import sealImg from "@/assets/product-discovery.jpg";
 import finishImg from "@/assets/arm-perfume.jpg";
 import refinedImg from "@/assets/mood-refined.jpg";
-import ritualVideo from "@/assets/amara-ritual.mp4.asset.json";
+import honeyVideo from "@/assets/honey.mp4";
 import { Droplets, Milk, Droplet, Sparkles } from "lucide-react";
 
 type StepLink = LinkProps["to"];
@@ -96,7 +96,7 @@ export function Ritual() {
       >
         <video
           ref={videoRef}
-          src={ritualVideo.url}
+          src={honeyVideo}
           poster={refinedImg}
           autoPlay
           muted
