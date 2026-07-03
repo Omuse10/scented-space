@@ -46,6 +46,7 @@ function BodyLotionPage() {
           </>
         }
         intro="Fast-absorbing hydration that layers beautifully under perfume oil. For daytime, warm weather, and skin that wants to feel soft without weight."
+        isExpanded={true}
       />
 
       <section className="bg-ivory">

@@ -41,6 +41,7 @@ function NourishingBodyOilPage() {
             <span className="serif-italic text-gold">More indulgent.</span>
           </>
         }
+        isExpanded={true}
       />
 
       <section className="bg-ivory">

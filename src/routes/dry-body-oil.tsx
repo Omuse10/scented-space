@@ -45,6 +45,7 @@ function DryBodyOilPage() {
             <span className="serif-italic text-gold">Fast absorbing.</span>
           </>
         }
+        isExpanded={true}
       />
 
       <section className="bg-ivory">

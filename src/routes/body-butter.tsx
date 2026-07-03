@@ -42,6 +42,7 @@ function BodyButterPage() {
           </>
         }
         intro="Whipped, deeply nourishing butters that melt into the skin. For dry skin, night-time rituals, and a velvety finish that lasts."
+        isExpanded={true}
       />
 
       <section className="bg-ivory">

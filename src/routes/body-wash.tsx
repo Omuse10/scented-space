@@ -36,6 +36,7 @@ function BodyWashPage() {
             <span className="serif-italic text-gold">beautifully scented skin.</span>
           </>
         }
+        isExpanded={true}
       />
 
       <section className="bg-ivory">

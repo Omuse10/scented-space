@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { PageHeader } from "@/components/site/PageHeader";
 import { Bestsellers } from "@/components/site/Bestsellers";
 import {
   moods,
@@ -125,34 +126,17 @@ function PerfumeOilsPage() {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-brown text-ivory pt-32 md:pt-40 pb-20 md:pb-28">
-        <img
-          src={perfumeSetImg}
-          alt="The Scented Space perfume oil collection — amber glass bottles in warm light"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="relative mx-auto max-w-7xl px-5 md:px-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-            className="max-w-3xl"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <span className="hairline" />
-              <span className="eyebrow text-ivory/80">Perfume Oils</span>
-            </div>
-            <h1 className="display-xl text-ivory" style={{ textShadow: "0 2px 18px rgba(0,0,0,0.45)" }}>
-              The full{" "}
-              <span className="serif-italic text-gold">collection.</span>
-            </h1>
-            <p className="mt-8 text-ivory leading-relaxed md:text-lg max-w-2xl" style={{ textShadow: "0 2px 14px rgba(0,0,0,0.5)" }}>
-              Long-wear perfume oils, poured in small batches in Nairobi. Choose
-              a feeling — the right scent follows.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Perfume Oils"
+        title={
+          <>
+            The full <span className="serif-italic text-gold">collection.</span>
+          </>
+        }
+        intro="Long-wear perfume oils, poured in small batches in Nairobi. Choose a feeling — the right scent follows."
+        backgroundImage={perfumeSetImg}
+        isExpanded={true}
+      />
 
       <Bestsellers variant="carousel" />
 

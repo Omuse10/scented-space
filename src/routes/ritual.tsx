@@ -116,6 +116,7 @@ function RitualPage() {
         eyebrow="The Ritual"
         title={<>The art of <span className="serif-italic text-gold">scented skin.</span></>}
         intro="Fragrance is not a finishing touch. It is built — slowly, layer by layer. This is how scent is meant to live on the skin."
+        isExpanded={true}
       />
 
       <section className="bg-ivory">

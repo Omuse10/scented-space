@@ -38,6 +38,7 @@ function RitualsPage() {
         }
         intro="Beautiful scent begins with beautiful skin. Each ritual is the full layering — composed in one of our signature scents, in one box."
         backgroundImage={ritualsBg.url}
+        isExpanded={true}
       />
 
       <section className="bg-ivory">

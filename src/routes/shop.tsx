@@ -1,6 +1,7 @@
 
 import { createFileRoute, Link } from "@tanstack/react-router";
 import shopTheHouseBg from "@/assets/shop-the-house-bg.jpg.asset.json";
+import shopHeroVideo from "@/assets/Odys.mp4";
 import { motion } from "framer-motion";
 import { ShoppingBag, ArrowUpRight } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
@@ -48,7 +49,9 @@ function ShopPage() {
           </>
         }
         intro="Begin where it fits — by feeling, with a Discovery Set, a complete Ritual, or a single perfume oil."
-        backgroundImage={shopTheHouseBg.url}
+        backgroundVideo={shopHeroVideo}
+        isExpanded={true}
+        videoPlaybackRate={0.5}
       />
 
       {/* Discovery Sets */}

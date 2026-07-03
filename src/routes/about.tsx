@@ -33,6 +33,7 @@ function AboutPage() {
         title={<>A house, <span className="serif-italic text-gold">not a brand.</span></>}
         intro="The Scented Space began in Nairobi with a small question: what would it look like to bring beauty, presence, and intention into the everyday? The answer started with scent — and grew into a ritual house."
         backgroundImage={aboutBg.url}
+        isExpanded={true}
       />
 
       {/* Founder letter */}

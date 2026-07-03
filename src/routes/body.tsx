@@ -67,6 +67,7 @@ function BodyPage() {
           </>
         }
         intro="Cleansed, hydrated, sealed — each step composed in our signature scents, so the fragrance lives on the skin from morning until evening."
+        isExpanded={true}
       />
 
       <section className="bg-ivory">

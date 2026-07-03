@@ -62,6 +62,7 @@ function ContactPage() {
         }
         intro="Every message is read by a person. Whichever door suits you — we'll reply slowly and well."
         backgroundImage={contactBg.url}
+        isExpanded={true}
       />
 
       <section className="bg-ivory">
