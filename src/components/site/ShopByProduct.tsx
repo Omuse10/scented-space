@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import bodyWashImg from "@/assets/product-nahla.jpg";
-import bodyButterImg from "@/assets/mood-warm.jpg";
+import bodyButterImg from "@/assets/Butter.jpg";
 import bodyLotionImg from "@/assets/mood-radiant.jpg";
-import bodyOilImg from "@/assets/product-velvet.jpg";
-import perfumeOilImg from "@/assets/product-discovery.jpg";
+import bodyOilImg from "@/assets/body oil.jpg";
+import perfumeOilImg from "@/assets/perf oil.jpg";
 
 const cards = [
   {
@@ -26,7 +26,7 @@ const cards = [
   {
     title: "Body Lotion",
     subtitle: "Light hydration",
-    description: "An everyday veil of moisture — quick, weightless, never insistent.",
+    description: "An everyday veil of moisture quick, weightless, never insistent.",
     image: bodyLotionImg,
     to: "/moisture" as const,
     discoverTo: "/shop" as const,
@@ -42,7 +42,7 @@ const cards = [
   {
     title: "Perfume Oil",
     subtitle: "The finishing touch",
-    description: "A signature drawn close to the skin — warm, intimate, unmistakably yours.",
+    description: "A signature drawn close to the skin warm, intimate, unmistakably yours.",
     image: perfumeOilImg,
     to: "/perfume-oils" as const,
     discoverTo: "/shop" as const,
