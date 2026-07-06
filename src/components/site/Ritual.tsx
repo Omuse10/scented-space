@@ -134,7 +134,9 @@ export function Ritual() {
               >
                 {/* Mobile: two-column 50/50 side-by-side */}
                 <div className="flex md:hidden h-56">
-                  <div className={`w-1/2 h-full relative overflow-hidden ${reverse ? "order-2 rounded-r-[1.5rem]" : "order-1 rounded-l-[1.5rem]"}`}>
+                  <div
+                    className={`w-1/2 h-full relative overflow-hidden ${reverse ? "order-2 rounded-r-[1.5rem]" : "order-1 rounded-l-[1.5rem]"}`}
+                  >
                     <img
                       src={s.image}
                       alt={s.title}
