@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useCart } from "@/lib/cart";
@@ -17,10 +17,18 @@ export function Nav() {
   const { count, setOpen } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 24);
+      setHidden(currentScrollY > lastScrollY.current && currentScrollY > 100);
+      lastScrollY.current = currentScrollY;
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -44,7 +52,8 @@ export function Nav() {
         solid
           ? "bg-brown/95 backdrop-blur-md border-b border-gold/20 shadow-[0_2px_24px_-12px_rgba(0,0,0,0.45)]"
           : "bg-transparent"
-      }`}
+      } ${hidden ? "-translate-y-full" : "translate-y-0"}`}
+      style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}
     >
       <div className="mx-auto max-w-7xl px-5 md:px-10 h-20 md:h-24 flex items-center justify-between gap-4">
         <Link
