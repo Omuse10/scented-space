@@ -110,7 +110,11 @@ export function Ritual() {
         <div className="absolute bottom-10 md:bottom-16 left-5 md:left-16 right-5 md:right-16">
           <p
             className="text-ivory max-w-xl serif-italic"
-            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.5rem, 3vw, 2.5rem)", lineHeight: 1.15 }}
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
+              lineHeight: 1.15,
+            }}
           >
             "She does not perfume herself. She prepares the skin to receive it."
           </p>
@@ -126,11 +130,11 @@ export function Ritual() {
             return (
               <div
                 key={s.n}
-                className="bg-ivory rounded-lg overflow-hidden border border-brown/10 md:border-0"
+                className="bg-ivory rounded-[1.5rem] overflow-hidden border border-brown/10 md:border-0"
               >
                 {/* Mobile: two-column 50/50 side-by-side */}
                 <div className="flex md:hidden h-56">
-                  <div className={`w-1/2 h-full relative ${reverse ? "order-2" : "order-1"}`}>
+                  <div className={`w-1/2 h-full relative overflow-hidden ${reverse ? "order-2 rounded-r-[1.5rem]" : "order-1 rounded-l-[1.5rem]"}`}>
                     <img
                       src={s.image}
                       alt={s.title}
@@ -141,10 +145,10 @@ export function Ritual() {
                       Step {s.n}
                     </span>
                   </div>
-                  <div className={`w-1/2 h-full flex flex-col justify-center p-4 ${reverse ? "order-1" : "order-2"}`}>
-                    <span className="text-gold tracking-[0.25em] text-xs eyebrow">
-                      {s.sub}
-                    </span>
+                  <div
+                    className={`w-1/2 h-full flex flex-col justify-center p-4 ${reverse ? "order-1" : "order-2"}`}
+                  >
+                    <span className="text-gold tracking-[0.25em] text-xs eyebrow">{s.sub}</span>
                     <h3
                       className="text-brown mt-1"
                       style={{
@@ -168,14 +172,14 @@ export function Ritual() {
                 </div>
 
                 {/* Desktop: alternating 12-column layout */}
-                <div className="hidden md:grid md:grid-cols-12 md:gap-16 md:items-center">
+                <div className="hidden md:grid md:grid-cols-12 md:gap-10 md:items-center">
                   <motion.div
                     initial={{ opacity: 0, x: reverse ? 40 : -40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-                    className={`relative overflow-hidden rounded-lg aspect-[5/6] md:col-span-7 ${
-                      reverse ? "md:col-start-6" : ""
+                    className={`relative overflow-hidden rounded-[1.5rem] aspect-[4/5] md:col-span-5 ${
+                      reverse ? "md:col-start-8" : "md:col-start-1"
                     }`}
                   >
                     <img
@@ -194,8 +198,8 @@ export function Ritual() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
-                    className={`flex flex-col justify-center md:col-span-4 ${
-                      reverse ? "md:col-start-2 md:row-start-1" : "md:col-start-9"
+                    className={`flex flex-col justify-center md:col-span-5 ${
+                      reverse ? "md:col-start-2 md:row-start-1" : "md:col-start-8"
                     }`}
                   >
                     <div className="flex items-center gap-3">
