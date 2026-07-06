@@ -102,7 +102,9 @@ function Coverflow({ items }: { items: CoverItem[] }) {
     containScroll: false,
     startIndex: initialIndex,
     duration: 45,
+    draggable: true,
     dragFree: true,
+    dragThreshold: 10,
     watchDrag: true,
   });
   const [selected, setSelected] = useState(initialIndex);
@@ -157,7 +159,7 @@ function Coverflow({ items }: { items: CoverItem[] }) {
       </button>
 
       <div className="overflow-hidden -mx-5 md:-mx-10 py-4" ref={emblaRef}>
-        <ul className="flex items-center touch-pan-y will-change-transform">
+        <ul className="flex items-center will-change-transform">
           {loopedItems.map((p, i) => {
             const distance = distanceFrom(i);
             const isActive = distance === 0;

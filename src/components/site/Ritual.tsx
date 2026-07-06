@@ -74,7 +74,7 @@ export function Ritual() {
   return (
     <section id="ritual" className="bg-cream">
       {/* Opening manifesto */}
-      <div className="mx-auto max-w-7xl px-5 md:px-10 pt-24 md:pt-36 pb-16 md:pb-24">
+      <div className="mx-auto max-w-7xl px-5 md:px-10 pt-6 md:pt-16 pb-16 md:pb-24">
         <div className="text-center">
           <span className="eyebrow text-gold">THE FOUR RITUALS</span>
           <h2 className="display-lg text-brown mt-3 max-w-3xl mx-auto">
