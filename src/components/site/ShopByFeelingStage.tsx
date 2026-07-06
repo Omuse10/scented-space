@@ -154,7 +154,7 @@ export function ShopByFeelingStage() {
   }, [playing, activeIdx]);
 
   return (
-    <section className="bg-[#150E08]">
+    <section data-tour="mood-filter" className="bg-[#150E08]">
       <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-12 py-14 md:py-20 lg:py-24">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">

@@ -330,6 +330,7 @@ function ShopCard({ product, index }: { product: Product; index: number }) {
           <button
             type="button"
             onClick={handleAdd}
+            data-tour="product-add-ritual"
             className="inline-flex items-center justify-center gap-2 w-full h-10 sm:h-11 rounded-md bg-brown text-ivory eyebrow text-[0.65rem] tracking-[0.28em] hover:bg-cocoa active:scale-[0.99] transition-all"
           >
             Add to Cart

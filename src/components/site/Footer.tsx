@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Logo } from "@/components/site/Logo";
+import { startTour } from "@/lib/tour";
 
 export function Footer() {
   return (
@@ -46,7 +47,16 @@ export function Footer() {
 
         <div className="mt-16 pt-8 border-t border-ivory/15 flex flex-col md:flex-row justify-between gap-4 eyebrow text-ivory/45 text-[0.625rem]">
           <span>© {new Date().getFullYear()} The Scented Space</span>
-          <span>Composed slowly, in Africa.</span>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={() => startTour({ force: true })}
+              className="text-ivory/55 hover:text-gold transition-colors"
+            >
+              Take a Tour
+            </button>
+            <span>Composed slowly, in Africa.</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,0 +1,102 @@
+.driver-popover {
+  background: #f8efe3;
+  color: #5c2a20;
+  border: 1px solid rgba(201, 163, 106, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 20px 42px -24px rgba(60, 30, 15, 0.45);
+  max-width: min(360px, calc(100vw - 20px));
+}
+
+.driver-popover * {
+  font-family: Inter, sans-serif;
+}
+
+.driver-popover-title {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  color: #5c2a20;
+  font-size: 1.55rem;
+  line-height: 1.08;
+}
+
+.driver-popover-description {
+  color: rgba(92, 42, 32, 0.9);
+  line-height: 1.55;
+}
+
+.driver-popover-progress-text {
+  color: rgba(92, 42, 32, 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.65rem;
+}
+
+.driver-popover-arrow {
+  color: #f8efe3;
+}
+
+.driver-popover-next-btn,
+.driver-popover-prev-btn,
+.driver-tour-skip {
+  border: none;
+  border-radius: 9999px;
+  box-shadow: none;
+  text-shadow: none;
+  background: #c1683b;
+  color: #f8efe3;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.driver-popover-next-btn:hover,
+.driver-popover-prev-btn:hover,
+.driver-tour-skip:hover {
+  background: #ab5732;
+  color: #f8efe3;
+  transform: translateY(-1px);
+}
+
+.driver-popover-close-btn {
+  min-width: 3.1rem;
+  min-height: 2rem;
+  padding: 0.35rem 0.7rem;
+}
+
+.driver-popover-footer {
+  gap: 0.45rem;
+}
+
+.driver-popover-navigation-btns {
+  gap: 0.45rem;
+}
+
+.driver-stage {
+  border-radius: 12px;
+  box-shadow: 0 0 0 2px rgba(201, 163, 106, 0.45);
+}
+
+.driver-overlay,
+.driver-stage {
+  z-index: 1000000000;
+}
+
+.driver-popover {
+  z-index: 1000000002;
+}
+
+.driver-active-element {
+  z-index: 1000000001;
+}
+
+@media (max-width: 767px) {
+  .driver-popover {
+    max-width: calc(100vw - 14px);
+  }
+
+  .driver-popover-title {
+    font-size: 1.35rem;
+  }
+
+  .driver-popover-description {
+    font-size: 0.92rem;
+  }
+}

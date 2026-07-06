@@ -4,7 +4,7 @@ import heroImg from "@/assets/arm-perfume.jpg";
 
 export function Hero() {
   return (
-    <section id="top" className="relative min-h-[100svh] w-full overflow-hidden bg-brown">
+    <section id="top" data-tour="hero-section" className="relative min-h-[100svh] w-full overflow-hidden bg-brown">
       <motion.img
         src={heroImg}
         alt="A woman in warm natural light, anointing her skin with fragrance oil"

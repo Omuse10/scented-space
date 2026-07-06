@@ -18,6 +18,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { CartDrawer } from "@/components/site/CartDrawer";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
+import { initTourOnFirstVisit } from "@/lib/tour";
 
 function NotFoundComponent() {
   return (
@@ -137,6 +138,11 @@ function RouteTransition() {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    initTourOnFirstVisit(pathname);
+  }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
