@@ -35,6 +35,10 @@ export function PageHeader({
   const heightClass = isExpanded ? "min-h-[100svh]" : "";
   const paddingClass = isExpanded ? "pt-28 md:pt-40 pb-12 md:pb-0 flex flex-col justify-end md:justify-center" : "pt-32 md:pt-40 pb-20 md:pb-28";
   
+  const overlayClass = backgroundVideo
+    ? "absolute inset-0 bg-black/10"
+    : "absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/50 to-brown/30 md:bg-gradient-to-r md:from-brown/80 md:via-brown/40 md:to-brown/20";
+
   return (
     <section
       className={`relative text-ivory ${paddingClass} overflow-hidden ${heightClass}`}
@@ -73,7 +77,7 @@ export function PageHeader({
       )}
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/50 to-brown/30 md:bg-gradient-to-r md:from-brown/80 md:via-brown/40 md:to-brown/20" />
+      <div className={overlayClass} />
 
       <div className={`relative z-10 mx-auto max-w-7xl px-5 md:px-10 ${center ? "text-center" : ""}`}>
         <motion.div
