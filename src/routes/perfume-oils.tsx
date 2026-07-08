@@ -24,7 +24,7 @@ import {
   Flower2,
   Clock,
 } from "lucide-react";
-import perfImage from "@/assets/perf.jpg";
+import perfumeHeroImage from "@/assets/Experience the magic of our latest scents, now available as-⚜️ Perfume Oils⚜️ Dry Body Oils⚜️ No.jpg";
 
 const ABOUT: Record<string, string> = {
   nahla:
@@ -134,7 +134,7 @@ function PerfumeOilsPage() {
           </>
         }
         intro="Long-wear perfume oils, poured in small batches in Nairobi. Choose a feeling — the right scent follows."
-        backgroundImage={perfImage}
+        backgroundImage={perfumeHeroImage}
         heroHeightClassName="min-h-[74svh] md:min-h-[86svh]"
         backgroundPositionClassName="bg-[center_22%] md:bg-center"
         overlayClassName="absolute inset-0 bg-gradient-to-t from-brown/62 via-brown/26 to-brown/8 md:bg-gradient-to-r md:from-brown/56 md:via-brown/18 md:to-transparent"
