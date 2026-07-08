@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { PageHeader } from "@/components/site/PageHeader";
 import { oilsWithFormat, type Format, type Product } from "@/lib/products";
+import scentedVideo from "@/assets/scented.mp4";
 
 export const Route = createFileRoute("/body")({
   head: () => ({
@@ -67,6 +68,7 @@ function BodyPage() {
           </>
         }
         intro="Cleansed, hydrated, sealed — each step composed in our signature scents, so the fragrance lives on the skin from morning until evening."
+        backgroundVideo={scentedVideo}
         isExpanded={true}
       />
 

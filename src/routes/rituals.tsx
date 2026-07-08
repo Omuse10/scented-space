@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { PageHeader } from "@/components/site/PageHeader";
 import { rituals, FORMAT_LABEL, type Ritual } from "@/lib/products";
 import { useCart } from "@/lib/cart";
-import ritualsBg from "@/assets/rituals-bg.jpg.asset.json";
+import scentedVideo from "@/assets/scented.mp4";
 
 export const Route = createFileRoute("/rituals")({
   head: () => ({
@@ -37,8 +37,9 @@ function RitualsPage() {
           </>
         }
         intro="Beautiful scent begins with beautiful skin. Each ritual is the full layering — composed in one of our signature scents, in one box."
-        backgroundImage={ritualsBg.url}
+        backgroundVideo={scentedVideo}
         isExpanded={true}
+        videoPlaybackRate={0.8}
       />
 
       <section className="bg-ivory">
