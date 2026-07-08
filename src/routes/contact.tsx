@@ -62,6 +62,7 @@ function ContactPage() {
         }
         intro="Every message is read by a person. Whichever door suits you — we'll reply slowly and well."
         backgroundImage={contactImage}
+        overlayClassName="absolute inset-0 bg-gradient-to-t from-brown/50 via-brown/20 to-transparent md:bg-gradient-to-r md:from-brown/45 md:via-brown/12 md:to-transparent"
         isExpanded={true}
       />
 

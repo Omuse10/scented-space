@@ -11,6 +11,7 @@ type Props = {
   backgroundVideo?: string;
   isExpanded?: boolean;
   videoPlaybackRate?: number;
+  overlayClassName?: string;
 };
 
 export function PageHeader({ 
@@ -21,7 +22,8 @@ export function PageHeader({
   backgroundImage,
   backgroundVideo,
   isExpanded = false,
-  videoPlaybackRate = 1
+  videoPlaybackRate = 1,
+  overlayClassName,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -35,9 +37,9 @@ export function PageHeader({
   const heightClass = isExpanded ? "min-h-[100svh]" : "";
   const paddingClass = isExpanded ? "pt-28 md:pt-40 pb-12 md:pb-0 flex flex-col justify-end md:justify-center" : "pt-32 md:pt-40 pb-20 md:pb-28";
   
-  const overlayClass = backgroundVideo
+  const overlayClass = overlayClassName ?? (backgroundVideo
     ? "absolute inset-0 bg-black/10"
-    : "absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/50 to-brown/30 md:bg-gradient-to-r md:from-brown/80 md:via-brown/40 md:to-brown/20";
+    : "absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/50 to-brown/30 md:bg-gradient-to-r md:from-brown/80 md:via-brown/40 md:to-brown/20");
 
   return (
     <section
