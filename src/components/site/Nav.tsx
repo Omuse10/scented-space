@@ -56,7 +56,7 @@ export function Nav() {
         } ${hidden ? "-translate-y-full" : "translate-y-0"}`}
         style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}
       >
-        <div className="mx-auto max-w-7xl px-5 md:px-10 h-20 md:h-24 flex items-center justify-between gap-4">
+        <div className="mx-auto max-w-7xl px-5 md:px-10 h-20 md:h-24 flex items-center justify-between gap-5 md:gap-8">
           <Link
             to="/"
             aria-label="The Scented Space — home"
@@ -65,23 +65,23 @@ export function Nav() {
             <Logo className="h-full w-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]" />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-8">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
-                className="eyebrow text-ivory/80 hover:text-gold transition-colors"
-                activeProps={{ className: "eyebrow text-gold" }}
+                className="eyebrow relative py-2 text-ivory/80 hover:text-gold transition-colors after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
+                activeProps={{ className: "eyebrow relative py-2 text-gold after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-full after:bg-gold" }}
               >
                 {l.label}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 md:gap-5">
+          <div className="flex items-center gap-2 md:gap-4">
             <button
               onClick={() => setOpen(true)}
-              className="eyebrow text-ivory hover:text-gold transition-colors py-2 px-1"
+              className="eyebrow text-ivory hover:text-gold transition-colors py-2 px-2 rounded-full hover:bg-ivory/5"
               aria-label="Open cart"
               data-tour="cart-icon"
             >
@@ -89,7 +89,7 @@ export function Nav() {
             </button>
             <button
               onClick={() => setMenu((v) => !v)}
-              className="lg:hidden w-10 h-10 -mr-2 flex flex-col items-center justify-center gap-[5px]"
+              className="lg:hidden w-10 h-10 -mr-2 flex flex-col items-center justify-center gap-[5px] rounded-full hover:bg-ivory/5 transition-colors"
               aria-label="Menu"
             >
               <span
