@@ -4,10 +4,10 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useCart } from "@/lib/cart";
 import { Logo } from "@/components/site/Logo";
 import armPerfumeImg from "@/assets/arm-perfume.jpg";
-import aboutBg from "@/assets/about-bg.jpg.asset.json";
-import shopBg from "@/assets/shop-the-house-bg.jpg.asset.json";
-import ritualsBg from "@/assets/rituals-bg.jpg.asset.json";
 import perfImg from "@/assets/perf.jpg";
+import founderImg from "@/assets/founder.jpg";
+import heroImg from "@/assets/hero.jpg";
+import ritualImg from "@/assets/ritual.jpg";
 
 const links = [
   { to: "/", label: "Home" },
@@ -105,7 +105,7 @@ const megaMenus: Record<string, MegaMenuData> = {
       },
     ],
     feature: {
-      image: shopBg.url,
+      image: heroImg,
       title: "Shop the house",
       description:
         "A considered edit of fragrance and body rituals, composed to move from discovery to daily wear.",
@@ -145,7 +145,7 @@ const megaMenus: Record<string, MegaMenuData> = {
       },
     ],
     feature: {
-      image: ritualsBg.url,
+      image: ritualImg,
       title: "A ritual, in sequence",
       description:
         "Layered care for skin and scent, built to feel slow, tactile, and beautifully composed.",
@@ -223,7 +223,7 @@ const megaMenus: Record<string, MegaMenuData> = {
       },
     ],
     feature: {
-      image: aboutBg.url,
+      image: founderImg,
       title: "A house, not a brand",
       description:
         "The Scented Space is built slowly, with restraint, intention, and a quiet luxury that stays with you.",
