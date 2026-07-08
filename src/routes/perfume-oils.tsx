@@ -135,12 +135,11 @@ function PerfumeOilsPage() {
         }
         intro="Long-wear perfume oils, poured in small batches in Nairobi. Choose a feeling — the right scent follows."
         backgroundImage={perfumeHeroImage}
-        heroHeightClassName="min-h-[74svh] md:min-h-[86svh]"
-        backgroundPositionClassName="bg-[center_22%] md:bg-center"
-        overlayClassName="absolute inset-0 bg-gradient-to-t from-brown/62 via-brown/26 to-brown/8 md:bg-gradient-to-r md:from-brown/56 md:via-brown/18 md:to-transparent"
-        contentClassName="max-w-2xl bg-brown/20 backdrop-blur-[1px] rounded-sm px-4 py-5 md:px-6 md:py-7"
+        backgroundPositionClassName="bg-[center_16%] md:bg-[center_30%]"
+        overlayClassName="absolute inset-0 bg-gradient-to-t from-brown/70 via-brown/34 to-brown/10 md:bg-gradient-to-r md:from-brown/62 md:via-brown/24 md:to-transparent"
+        contentClassName="max-w-2xl bg-brown/32 backdrop-blur-[1.5px] ring-1 ring-ivory/15 rounded-sm px-4 py-5 md:px-6 md:py-7"
         titleClassName="text-[clamp(2.2rem,6.2vw,4.8rem)] leading-[1.02]"
-        introClassName="mt-5 md:mt-6 text-[0.95rem] md:text-base max-w-xl"
+        introClassName="mt-5 md:mt-6 text-[0.95rem] md:text-base max-w-xl text-ivory/95"
         isExpanded={true}
       />
 

@@ -39,12 +39,11 @@ function AboutPage() {
         intro="The Scented Space began in Nairobi with a small question: what would it look like to bring beauty, presence, and intention into the everyday? The answer started with scent — and grew into a ritual house."
         backgroundImages={[zeroImage, oneImage, twoImage, threeImage, fourImage, atTheScentedSpaceImage]}
         imageRotationMs={4500}
-        overlayClassName="absolute inset-0 bg-gradient-to-t from-brown/65 via-brown/28 to-brown/8 md:bg-gradient-to-r md:from-brown/62 md:via-brown/24 md:to-transparent"
-        contentClassName="max-w-2xl bg-brown/22 backdrop-blur-[1px] rounded-sm px-4 py-5 md:px-6 md:py-6"
-        heroHeightClassName="min-h-[72svh] md:min-h-[82svh]"
+        overlayClassName="absolute inset-0 bg-gradient-to-t from-brown/72 via-brown/36 to-brown/10 md:bg-gradient-to-r md:from-brown/64 md:via-brown/30 md:to-transparent"
+        contentClassName="max-w-2xl bg-brown/34 backdrop-blur-[1.5px] ring-1 ring-ivory/15 rounded-sm px-4 py-5 md:px-6 md:py-6"
         titleClassName="text-[clamp(2.1rem,6vw,4.2rem)] leading-[1.02]"
-        introClassName="mt-5 md:mt-6 text-[0.95rem] md:text-base max-w-xl"
-        backgroundPositionClassName="bg-[center_24%] md:bg-center"
+        introClassName="mt-5 md:mt-6 text-[0.95rem] md:text-base max-w-xl text-ivory/95"
+        backgroundPositionClassName="bg-[center_18%] md:bg-[center_28%]"
         isExpanded={true}
       />
 
