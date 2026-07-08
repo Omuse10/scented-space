@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Props = {
   eyebrow: string;
@@ -8,10 +8,17 @@ type Props = {
   intro?: ReactNode;
   align?: "left" | "center";
   backgroundImage?: string;
+  backgroundImages?: string[];
   backgroundVideo?: string;
   isExpanded?: boolean;
   videoPlaybackRate?: number;
   overlayClassName?: string;
+  imageRotationMs?: number;
+  contentClassName?: string;
+  heroHeightClassName?: string;
+  titleClassName?: string;
+  introClassName?: string;
+  backgroundPositionClassName?: string;
 };
 
 export function PageHeader({ 
@@ -20,12 +27,30 @@ export function PageHeader({
   intro, 
   align = "left", 
   backgroundImage,
+  backgroundImages,
   backgroundVideo,
   isExpanded = false,
   videoPlaybackRate = 1,
   overlayClassName,
+  imageRotationMs = 5000,
+  contentClassName,
+  heroHeightClassName,
+  titleClassName,
+  introClassName,
+  backgroundPositionClassName,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  const heroImages = useMemo(() => {
+    if (backgroundImages && backgroundImages.length > 0) {
+      return backgroundImages;
+    }
+    if (backgroundImage) {
+      return [backgroundImage];
+    }
+    return [];
+  }, [backgroundImage, backgroundImages]);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -33,8 +58,22 @@ export function PageHeader({
     }
   }, [videoPlaybackRate]);
 
+  useEffect(() => {
+    setActiveImageIndex(0);
+  }, [heroImages]);
+
+  useEffect(() => {
+    if (backgroundVideo || heroImages.length <= 1) return;
+
+    const timer = window.setInterval(() => {
+      setActiveImageIndex((current) => (current + 1) % heroImages.length);
+    }, imageRotationMs);
+
+    return () => window.clearInterval(timer);
+  }, [backgroundVideo, heroImages, imageRotationMs]);
+
   const center = align === "center";
-  const heightClass = isExpanded ? "min-h-[100svh]" : "";
+  const heightClass = heroHeightClassName ?? (isExpanded ? "min-h-[100svh]" : "");
   const paddingClass = isExpanded ? "pt-28 md:pt-40 pb-12 md:pb-0 flex flex-col justify-end md:justify-center" : "pt-32 md:pt-40 pb-20 md:pb-28";
   
   const overlayClass = overlayClassName ?? (backgroundVideo
@@ -45,7 +84,7 @@ export function PageHeader({
     <section
       className={`relative text-ivory ${paddingClass} overflow-hidden ${heightClass}`}
       style={
-        backgroundImage || backgroundVideo
+        heroImages.length > 0 || backgroundVideo
           ? {
               backgroundColor: "#4a3b32",
             }
@@ -66,16 +105,18 @@ export function PageHeader({
         </video>
       )}
       
-      {backgroundImage && !backgroundVideo && (
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
+      {heroImages.length > 0 && !backgroundVideo && (
+        <>
+          {heroImages.map((imageUrl, idx) => (
+            <div
+              key={imageUrl + idx}
+              className={`absolute inset-0 bg-cover ${backgroundPositionClassName ?? "bg-center"} bg-no-repeat transition-opacity duration-1000 ${
+                idx === activeImageIndex ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ backgroundImage: `url(${imageUrl})` }}
+            />
+          ))}
+        </>
       )}
       
       {/* Gradient Overlay */}
@@ -86,16 +127,16 @@ export function PageHeader({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
-          className={`max-w-3xl ${center ? "mx-auto" : ""}`}
+          className={`max-w-3xl ${center ? "mx-auto" : ""} ${contentClassName ?? ""}`}
         >
           <div className={`flex items-center gap-3 mb-6 ${center ? "justify-center" : ""}`}>
             <span className="hairline" />
             <span className="eyebrow text-ivory/90">{eyebrow}</span>
             {center && <span className="hairline" />}
           </div>
-          <h1 className="display-xl text-ivory">{title}</h1>
+          <h1 className={`display-xl text-ivory ${titleClassName ?? ""}`}>{title}</h1>
           {intro && (
-            <p className={`mt-8 text-ivory/85 leading-relaxed md:text-lg max-w-2xl ${center ? "mx-auto" : ""}`}>
+            <p className={`mt-8 text-ivory/85 leading-relaxed md:text-lg max-w-2xl ${center ? "mx-auto" : ""} ${introClassName ?? ""}`}>
               {intro}
             </p>
           )}
