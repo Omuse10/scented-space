@@ -251,11 +251,11 @@ export function Nav() {
   const [activeMega, setActiveMega] = useState<string | null>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const lastScrollY = useRef(0);
-  const closeTimer = useRef<ReturnType<typeof window.setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const clearCloseTimer = () => {
     if (closeTimer.current) {
-      window.clearTimeout(closeTimer.current);
+      clearTimeout(closeTimer.current);
       closeTimer.current = null;
     }
   };
@@ -267,7 +267,7 @@ export function Nav() {
 
   const closeMegaSoon = () => {
     clearCloseTimer();
-    closeTimer.current = window.setTimeout(() => {
+    closeTimer.current = setTimeout(() => {
       setActiveMega(null);
     }, 150);
   };
@@ -385,52 +385,54 @@ export function Nav() {
             onMouseEnter={clearCloseTimer}
             onMouseLeave={closeMegaSoon}
           >
-            <div className="mx-auto max-w-[calc(100vw-2rem)] xl:max-w-[calc(100vw-3rem)] bg-[#F8F4EC] border-t border-[#E8DED2] shadow-[0_24px_60px_-28px_rgba(60,30,15,0.35)]">
-              <div className="mx-auto max-w-7xl px-12 xl:px-12 py-10 xl:py-12">
-                <div className="grid grid-cols-4 gap-10 xl:gap-12 items-start">
-                  <div className="col-span-3 grid grid-cols-3 gap-10 xl:gap-12">
-                    {activeMegaData.sections.map((section) => (
-                      <div key={section.title} className="min-w-0">
-                        <p className="eyebrow text-brown/55 mb-5 text-[0.625rem]">{section.title}</p>
-                        <ul className="space-y-3.5">
-                          {section.links.map((item) => (
-                            <li key={item.label}>
-                              <Link
-                                to={item.to}
-                                onClick={() => setActiveMega(null)}
-                                className="text-brown hover:text-terracotta transition-colors text-[1rem] leading-snug"
-                                style={{ fontFamily: "var(--font-display)" }}
-                              >
-                                {item.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="col-span-1 pl-2 xl:pl-4">
-                    <div className="relative aspect-[4/5] overflow-hidden bg-cream mb-5">
-                      <img
-                        src={activeMegaData.feature.image}
-                        alt={activeMegaData.feature.title}
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
+            <div className="mx-auto max-w-7xl px-5 md:px-10">
+              <div className="bg-[#F8F4EC] border-t border-[#E8DED2] shadow-[0_24px_60px_-28px_rgba(60,30,15,0.35)] h-[clamp(380px,45vh,450px)] max-h-[50vh]">
+                <div className="h-full px-12 xl:px-12 py-9 xl:py-10">
+                  <div className="grid grid-cols-4 gap-10 xl:gap-12 items-start h-full">
+                    <div className="col-span-3 grid grid-cols-3 gap-10 xl:gap-12">
+                      {activeMegaData.sections.map((section) => (
+                        <div key={section.title} className="min-w-0">
+                          <p className="eyebrow text-brown/55 mb-5 text-[0.625rem]">{section.title}</p>
+                          <ul className="space-y-3.5">
+                            {section.links.map((item) => (
+                              <li key={item.label}>
+                                <Link
+                                  to={item.to}
+                                  onClick={() => setActiveMega(null)}
+                                  className="text-brown hover:text-terracotta transition-colors text-[1rem] leading-snug"
+                                  style={{ fontFamily: "var(--font-display)" }}
+                                >
+                                  {item.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
                     </div>
-                    <h3 className="text-brown text-[1.4rem] leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-                      {activeMegaData.feature.title}
-                    </h3>
-                    <p className="mt-3 text-brown/70 leading-relaxed text-sm xl:text-[0.95rem] max-w-sm">
-                      {activeMegaData.feature.description}
-                    </p>
-                    <Link
-                      to={activeMegaData.feature.ctaTo}
-                      onClick={() => setActiveMega(null)}
-                      className="mt-5 inline-flex items-center gap-2 eyebrow text-[0.625rem] text-terracotta hover:text-brown transition-colors"
-                    >
-                      {activeMegaData.feature.ctaLabel}
-                    </Link>
+
+                    <div className="col-span-1 pl-2 xl:pl-4 flex flex-col h-full">
+                      <div className="relative h-[58%] overflow-hidden bg-cream mb-5">
+                        <img
+                          src={activeMegaData.feature.image}
+                          alt={activeMegaData.feature.title}
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                      </div>
+                      <h3 className="text-brown text-[1.4rem] leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+                        {activeMegaData.feature.title}
+                      </h3>
+                      <p className="mt-3 text-brown/70 leading-relaxed text-sm xl:text-[0.95rem] max-w-sm">
+                        {activeMegaData.feature.description}
+                      </p>
+                      <Link
+                        to={activeMegaData.feature.ctaTo}
+                        onClick={() => setActiveMega(null)}
+                        className="mt-5 inline-flex items-center gap-2 eyebrow text-[0.625rem] text-terracotta hover:text-brown transition-colors"
+                      >
+                        {activeMegaData.feature.ctaLabel}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
