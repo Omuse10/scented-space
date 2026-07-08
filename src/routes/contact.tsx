@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { PageHeader } from "@/components/site/PageHeader";
 import { useCart } from "@/lib/cart";
-import contactBg from "@/assets/contact-bg.jpg.asset.json";
+import contactImage from "@/assets/contact.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -61,7 +61,7 @@ function ContactPage() {
           </>
         }
         intro="Every message is read by a person. Whichever door suits you — we'll reply slowly and well."
-        backgroundImage={contactBg.url}
+        backgroundImage={contactImage}
         isExpanded={true}
       />
 
