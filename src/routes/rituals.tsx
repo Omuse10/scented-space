@@ -39,7 +39,7 @@ function RitualsPage() {
         intro="Beautiful scent begins with beautiful skin. Each ritual is the full layering — composed in one of our signature scents, in one box."
         backgroundVideo={scentedVideo}
         isExpanded={true}
-        videoPlaybackRate={0.8}
+        videoPlaybackRate={0.45}
       />
 
       <section className="bg-ivory">
