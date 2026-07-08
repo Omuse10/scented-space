@@ -13,7 +13,7 @@ export function Hero() {
         initial={{ scale: 1.08 }}
         animate={{ scale: 1 }}
         transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-0 h-full w-full object-cover object-[60%_center] md:object-[70%_center]"
+        className="absolute inset-0 h-full w-full object-cover object-[58%_center] md:object-[72%_center]"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/40 to-brown/30 md:bg-gradient-to-r md:from-brown/80 md:via-brown/30 md:to-transparent" />
 
@@ -22,18 +22,18 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-          className="max-w-xl"
+          className="max-w-xl md:max-w-2xl md:bg-brown/18 md:backdrop-blur-[1.5px] md:ring-1 md:ring-ivory/10 md:rounded-sm md:px-6 md:py-7"
         >
           <div className="flex items-center gap-3 text-ivory/80 mb-5 md:mb-8">
             <span className="hairline" />
             <span className="eyebrow text-ivory/80 text-[0.625rem] md:text-xs">Est. 2023 — Nairobi</span>
           </div>
-          <h1 className="display-xl text-ivory text-[3.25rem] leading-[0.95] md:text-inherit md:leading-inherit">
+          <h1 className="display-xl text-ivory text-[3.25rem] leading-[0.95] md:text-inherit md:leading-inherit md:max-w-[11ch]">
             Beautifully
             <br />
             <span className="serif-italic text-gold">Scented Skin.</span>
           </h1>
-          <p className="mt-5 md:mt-8 text-ivory/85 text-[0.95rem] md:text-lg max-w-md leading-relaxed">
+          <p className="mt-5 md:mt-8 text-ivory/88 text-[0.95rem] md:text-lg max-w-md leading-relaxed">
             Luxury perfume oils and body rituals designed to scent the skin beautifully.
           </p>
           <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">

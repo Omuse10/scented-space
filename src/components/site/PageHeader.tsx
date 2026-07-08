@@ -127,7 +127,7 @@ export function PageHeader({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut" }}
-          className={`max-w-3xl ${center ? "mx-auto" : ""} ${contentClassName ?? ""}`}
+          className={`max-w-2xl md:max-w-3xl ${center ? "mx-auto" : ""} ${contentClassName ?? ""}`}
         >
           <div className={`flex items-center gap-3 mb-6 ${center ? "justify-center" : ""}`}>
             <span className="hairline" />
