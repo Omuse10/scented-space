@@ -24,7 +24,7 @@ import {
   Flower2,
   Clock,
 } from "lucide-react";
-import perfumeSetImg from "@/assets/perfume-set.jpg";
+import perfImage from "@/assets/perf.jpg";
 
 const ABOUT: Record<string, string> = {
   nahla:
@@ -134,7 +134,13 @@ function PerfumeOilsPage() {
           </>
         }
         intro="Long-wear perfume oils, poured in small batches in Nairobi. Choose a feeling — the right scent follows."
-        backgroundImage={perfumeSetImg}
+        backgroundImage={perfImage}
+        heroHeightClassName="min-h-[74svh] md:min-h-[86svh]"
+        backgroundPositionClassName="bg-[center_22%] md:bg-center"
+        overlayClassName="absolute inset-0 bg-gradient-to-t from-brown/62 via-brown/26 to-brown/8 md:bg-gradient-to-r md:from-brown/56 md:via-brown/18 md:to-transparent"
+        contentClassName="max-w-2xl bg-brown/20 backdrop-blur-[1px] rounded-sm px-4 py-5 md:px-6 md:py-7"
+        titleClassName="text-[clamp(2.2rem,6.2vw,4.8rem)] leading-[1.02]"
+        introClassName="mt-5 md:mt-6 text-[0.95rem] md:text-base max-w-xl"
         isExpanded={true}
       />
 
