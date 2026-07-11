@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
-import { PageHeader } from "@/components/site/PageHeader";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Bestsellers } from "@/components/site/Bestsellers";
 import {
   moods,
@@ -37,12 +37,10 @@ const ABOUT: Record<string, string> = {
     "Zafira is comfort with backbone. Cocoa absolute and tonka layer over sandalwood, patchouli and amber for a gourmand warmth that never tips into sweetness.",
   "whispering-petals":
     "Whispering Petals is luminous and feminine. Lychee and pear lift a delicate bouquet of damask rose and peony, finished with a weightless white musk and soft amber.",
-  thea:
-    "Théa is sunlight through linen. Bright bergamot and green tea open onto tuberose and jasmine, settling into a clean white musk and warm vanilla wood.",
+  thea: "Théa is sunlight through linen. Bright bergamot and green tea open onto tuberose and jasmine, settling into a clean white musk and warm vanilla wood.",
   "riviera-dreams":
     "Riviera Dreams is fresh and effortless. Peony and pink pepper bloom over a quiet musk and cedar — easy to wear from a long afternoon into the evening.",
-  lyra:
-    "Lyra is soft, sunlit warmth. Ripe apricot and bergamot melt into jasmine and peach blossom, settling on a quiet amber and cashmere wood.",
+  lyra: "Lyra is soft, sunlit warmth. Ripe apricot and bergamot melt into jasmine and peach blossom, settling on a quiet amber and cashmere wood.",
   "velvet-elegance":
     "Velvet Elegance is sensual and magnetic. Saffron and pink pepper open onto hibiscus and rose damascena, wrapped in warm vanilla, patchouli and black amber.",
   "sensual-whispers":
@@ -113,8 +111,7 @@ export const Route = createFileRoute("/perfume-oils")({
       { property: "og:title", content: "Perfume Oils — The Scented Space" },
       {
         property: "og:description",
-        content:
-          "Long-wear perfume oils for skin — warm, radiant, bold, refined, distinguished.",
+        content: "Long-wear perfume oils for skin — warm, radiant, bold, refined, distinguished.",
       },
     ],
   }),
@@ -123,25 +120,26 @@ export const Route = createFileRoute("/perfume-oils")({
 
 function PerfumeOilsPage() {
   const visibleMoods = moods.filter((m) => m.key !== "discovery");
+  const heroSlides = useMemo<HeroSlide[]>(() => {
+    const selected = perfumeOils.slice(0, 4);
+    return selected.map((oil, index) => ({
+      id: oil.id,
+      image: index === 0 ? perfumeHeroImage : oil.image,
+      title: index === 0 ? "Luxury in Every Drop." : oil.name,
+      description:
+        index === 0
+          ? "Long-wear perfume oils, poured in small batches in Nairobi. Composed for skin that remembers every note."
+          : oil.feeling,
+      ctaLabel: "Shop Perfume Oils",
+      ctaTo: "/shop/$productId",
+      ctaParams: { productId: oil.id },
+      number: String(index + 1).padStart(2, "0"),
+    }));
+  }, []);
 
   return (
     <>
-      <PageHeader
-        eyebrow="Perfume Oils"
-        title={
-          <>
-            The full <span className="serif-italic text-gold">collection.</span>
-          </>
-        }
-        intro="Long-wear perfume oils, poured in small batches in Nairobi. Choose a feeling — the right scent follows."
-        backgroundImage={perfumeHeroImage}
-        backgroundPositionClassName="bg-[center_16%] md:bg-[center_30%]"
-        overlayClassName="absolute inset-0 bg-gradient-to-t from-brown/70 via-brown/34 to-brown/10 md:bg-gradient-to-r md:from-brown/62 md:via-brown/24 md:to-transparent"
-        contentClassName="max-w-2xl bg-brown/32 backdrop-blur-[1.5px] ring-1 ring-ivory/15 rounded-sm px-4 py-5 md:px-6 md:py-7"
-        titleClassName="text-[clamp(2.2rem,6.2vw,4.8rem)] leading-[1.02]"
-        introClassName="mt-5 md:mt-6 text-[0.95rem] md:text-base max-w-xl text-ivory/95"
-        isExpanded={true}
-      />
+      <PremiumPerfumeHero slides={heroSlides} autoPlayMs={5000} />
 
       <Bestsellers variant="carousel" />
 
@@ -161,14 +159,10 @@ function PerfumeOilsPage() {
                     <h2 className="display-lg text-brown">
                       {m.title.split(" & ")[0]}{" "}
                       {m.title.includes(" & ") && (
-                        <span className="serif-italic">
-                          &amp; {m.title.split(" & ")[1]}
-                        </span>
+                        <span className="serif-italic">&amp; {m.title.split(" & ")[1]}</span>
                       )}
                     </h2>
-                    <p className="mt-4 text-brown/75 leading-relaxed serif-italic">
-                      {m.emotion}
-                    </p>
+                    <p className="mt-4 text-brown/75 leading-relaxed serif-italic">{m.emotion}</p>
                   </div>
                   <p className="md:col-span-4 md:col-start-9 text-brown/65 text-sm leading-relaxed">
                     {m.forWhom}
@@ -205,6 +199,238 @@ function PerfumeOilsPage() {
         </div>
       </section>
     </>
+  );
+}
+
+type HeroSlide = {
+  id: string;
+  image: string;
+  title: string;
+  description: string;
+  ctaLabel: string;
+  ctaTo: "/shop/$productId";
+  ctaParams: { productId: string };
+  number: string;
+};
+
+function PremiumPerfumeHero({
+  slides,
+  autoPlayMs = 5000,
+}: {
+  slides: HeroSlide[];
+  autoPlayMs?: number;
+}) {
+  const [order, setOrder] = useState<number[]>(slides.map((_, index) => index));
+  const [isInteracting, setIsInteracting] = useState(false);
+  const interactionTimerRef = useRef<number | null>(null);
+
+  const activeIndex = order[0] ?? 0;
+  const activeSlide = slides[activeIndex];
+  const previewIndexes = order.slice(1, 4);
+
+  const swapEase: [number, number, number, number] = [0.87, 0, 0.13, 1];
+
+  const markInteraction = useCallback(() => {
+    setIsInteracting(true);
+    if (interactionTimerRef.current !== null) {
+      window.clearTimeout(interactionTimerRef.current);
+    }
+
+    interactionTimerRef.current = window.setTimeout(() => {
+      setIsInteracting(false);
+      interactionTimerRef.current = null;
+    }, 5000);
+  }, []);
+
+  const goNext = useCallback(() => {
+    setOrder((prev) => {
+      if (prev.length <= 1) return prev;
+      return [...prev.slice(1), prev[0]];
+    });
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setOrder((prev) => {
+      if (prev.length <= 1) return prev;
+      return [prev[prev.length - 1], ...prev.slice(0, -1)];
+    });
+  }, []);
+
+  const promoteSlide = useCallback((targetIndex: number) => {
+    setOrder((prev) => {
+      const targetPos = prev.indexOf(targetIndex);
+      if (targetPos <= 0) return prev;
+      return [...prev.slice(targetPos), ...prev.slice(0, targetPos)];
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isInteracting || slides.length <= 1) return;
+
+    const timer = window.setInterval(() => {
+      goNext();
+    }, autoPlayMs);
+
+    return () => window.clearInterval(timer);
+  }, [autoPlayMs, goNext, isInteracting, slides.length]);
+
+  useEffect(() => {
+    return () => {
+      if (interactionTimerRef.current !== null) {
+        window.clearTimeout(interactionTimerRef.current);
+      }
+    };
+  }, []);
+
+  if (!activeSlide) return null;
+
+  return (
+    <section
+      className="relative h-[100svh] overflow-hidden bg-[#1f1915] text-ivory"
+      onPointerDown={markInteraction}
+      onTouchStart={markInteraction}
+    >
+      <LayoutGroup>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSlide.id}
+            className="absolute inset-0"
+            initial={{ opacity: 0.2, scale: 1.06, filter: "blur(8px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.92, filter: "blur(8px)" }}
+            transition={{ duration: 1.2, ease: swapEase }}
+          >
+            <motion.div
+              layoutId={`hero-image-${activeSlide.id}`}
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${activeSlide.image})` }}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </LayoutGroup>
+
+      <div className="absolute inset-0 bg-gradient-to-r from-black/68 via-black/42 to-black/26" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_25%,rgba(255,255,255,0.08),transparent_40%)]" />
+
+      <motion.div
+        className="relative z-10 h-full"
+        drag="x"
+        dragElastic={0.06}
+        dragConstraints={{ left: 0, right: 0 }}
+        onDragStart={markInteraction}
+        onDragEnd={(_, info) => {
+          const swipe = info.offset.x + info.velocity.x * 120;
+          if (swipe < -120) {
+            markInteraction();
+            goNext();
+            return;
+          }
+          if (swipe > 120) {
+            markInteraction();
+            goPrev();
+          }
+        }}
+      >
+        <div className="flex h-full items-center px-5 md:px-10 lg:px-16 pt-24 md:pt-28 pb-24">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`content-${activeSlide.id}`}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 24 }}
+              transition={{ duration: 1.05, ease: swapEase }}
+              className="max-w-3xl"
+            >
+              <p className="eyebrow text-[0.68rem] md:text-[0.75rem] tracking-[0.3em] text-gold/95 mb-5">
+                Perfume Oils · {activeSlide.number}
+              </p>
+              <h1
+                className="text-[clamp(2.2rem,6.5vw,5.4rem)] leading-[1.02] tracking-[-0.02em] text-ivory"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                {activeSlide.title.split(" ").slice(0, -1).join(" ")}{" "}
+                <span className="serif-italic text-gold">
+                  {activeSlide.title.split(" ").slice(-1).join(" ")}
+                </span>
+              </h1>
+              <p className="mt-6 text-ivory/90 text-[0.98rem] md:text-lg max-w-xl leading-relaxed">
+                {activeSlide.description}
+              </p>
+              <div className="mt-8">
+                <Link
+                  to={activeSlide.ctaTo}
+                  params={activeSlide.ctaParams}
+                  className="inline-flex items-center gap-2 bg-terracotta text-ivory px-7 py-4 eyebrow tracking-[0.18em] hover:bg-gold hover:text-brown transition-colors"
+                >
+                  {activeSlide.ctaLabel}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
+
+      <div className="absolute bottom-8 right-5 md:right-10 z-20 flex items-end gap-3 md:gap-4">
+        {previewIndexes.map((slideIndex, stackIndex) => {
+          const slide = slides[slideIndex];
+          const scale = 1 - stackIndex * 0.03;
+          return (
+            <motion.button
+              key={slide.id}
+              type="button"
+              onClick={() => {
+                markInteraction();
+                promoteSlide(slideIndex);
+              }}
+              className="relative h-[112px] w-[178px] md:h-[130px] md:w-[206px] rounded-xl overflow-hidden border border-ivory/20 bg-black/20 backdrop-blur-md shadow-[0_20px_48px_-30px_rgba(0,0,0,0.8)]"
+              style={{
+                zIndex: 30 - stackIndex,
+              }}
+              initial={{ opacity: 0, y: 24, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale }}
+              transition={{ duration: 1.15, ease: swapEase }}
+              whileHover={{ y: -6 }}
+            >
+              <motion.div
+                layoutId={`hero-image-${slide.id}`}
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${slide.image})` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-transparent" />
+              <span className="absolute left-3 bottom-2 eyebrow text-[0.64rem] tracking-[0.26em] text-ivory/95">
+                {slide.number}
+              </span>
+            </motion.button>
+          );
+        })}
+      </div>
+
+      <div className="absolute bottom-8 left-5 md:left-10 z-20 flex items-center gap-2">
+        <button
+          type="button"
+          aria-label="Previous slide"
+          onClick={() => {
+            markInteraction();
+            goPrev();
+          }}
+          className="h-11 w-11 rounded-full border border-ivory/30 bg-black/25 backdrop-blur text-ivory hover:bg-black/35 transition-colors"
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          aria-label="Next slide"
+          onClick={() => {
+            markInteraction();
+            goNext();
+          }}
+          className="h-11 w-11 rounded-full border border-ivory/30 bg-black/25 backdrop-blur text-ivory hover:bg-black/35 transition-colors"
+        >
+          →
+        </button>
+      </div>
+    </section>
   );
 }
 
@@ -254,75 +480,87 @@ function EditorialCard({
       className="space-y-10 md:space-y-14"
     >
       <div className="grid grid-cols-12 gap-3 md:gap-12 items-stretch">
-      {/* Details */}
-      <div className={`col-span-5 ${reverse ? "order-2" : "order-1"}`}>
-        {Header}
+        {/* Details */}
+        <div className={`col-span-5 ${reverse ? "order-2" : "order-1"}`}>
+          {Header}
 
-        <p className="mt-4 md:mt-8 text-brown text-base md:text-2xl" style={{ fontFamily: "var(--font-display)" }}>
-          KSh {p.price.toLocaleString()}
-        </p>
+          <p
+            className="mt-4 md:mt-8 text-brown text-base md:text-2xl"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            KSh {p.price.toLocaleString()}
+          </p>
 
-        <button
-          type="button"
-          onClick={() => {
-            add({ id: p.id, name: p.name, price: p.price, image: p.image });
-            setOpen(true);
-          }}
-          className="mt-3 md:mt-6 w-full inline-flex items-center justify-center gap-2 bg-brown text-ivory text-[0.6rem] md:text-xs tracking-[0.18em] md:tracking-[0.22em] uppercase px-4 md:px-10 py-2.5 md:py-4 hover:bg-terracotta transition-colors"
-        >
-          Add to Cart <ShoppingBag className="w-3 h-3 md:w-4 md:h-4" />
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              add({ id: p.id, name: p.name, price: p.price, image: p.image });
+              setOpen(true);
+            }}
+            className="mt-3 md:mt-6 w-full inline-flex items-center justify-center gap-2 bg-brown text-ivory text-[0.6rem] md:text-xs tracking-[0.18em] md:tracking-[0.22em] uppercase px-4 md:px-10 py-2.5 md:py-4 hover:bg-terracotta transition-colors"
+          >
+            Add to Cart <ShoppingBag className="w-3 h-3 md:w-4 md:h-4" />
+          </button>
 
-        <div className="mt-5 md:mt-10">
-          <p className="eyebrow text-gold text-[0.55rem] md:text-[0.65rem] mb-3 md:mb-5">Scent Notes</p>
-          <div className="grid grid-cols-3 gap-1 md:gap-4">
-            {(["top", "heart", "base"] as const).map((tier, i) => {
-              const Icon = NOTE_ICONS[i];
-              const label = tier.toUpperCase();
-              const value = p.notes[tier]?.[0] ?? "";
-              return (
-                <div
-                  key={tier}
-                  className={`flex flex-col items-center text-center px-0.5 md:px-2 ${i < 2 ? "border-r border-brown/10" : ""}`}
-                >
-                  <span className="flex items-center justify-center w-8 h-8 md:w-16 md:h-16 rounded-full bg-cream mb-1.5 md:mb-3">
-                    <Icon className="w-3.5 h-3.5 md:w-7 md:h-7 text-gold" strokeWidth={1.25} />
-                  </span>
-                  <span className="eyebrow text-gold text-[0.5rem] md:text-[0.65rem] mb-0.5 md:mb-1.5">{label}</span>
-                  <span className="text-brown text-[0.6rem] md:text-base leading-tight md:leading-snug break-words" style={{ fontFamily: "var(--font-display)" }}>
-                    {value}
-                  </span>
-                </div>
-              );
-            })}
+          <div className="mt-5 md:mt-10">
+            <p className="eyebrow text-gold text-[0.55rem] md:text-[0.65rem] mb-3 md:mb-5">
+              Scent Notes
+            </p>
+            <div className="grid grid-cols-3 gap-1 md:gap-4">
+              {(["top", "heart", "base"] as const).map((tier, i) => {
+                const Icon = NOTE_ICONS[i];
+                const label = tier.toUpperCase();
+                const value = p.notes[tier]?.[0] ?? "";
+                return (
+                  <div
+                    key={tier}
+                    className={`flex flex-col items-center text-center px-0.5 md:px-2 ${i < 2 ? "border-r border-brown/10" : ""}`}
+                  >
+                    <span className="flex items-center justify-center w-8 h-8 md:w-16 md:h-16 rounded-full bg-cream mb-1.5 md:mb-3">
+                      <Icon className="w-3.5 h-3.5 md:w-7 md:h-7 text-gold" strokeWidth={1.25} />
+                    </span>
+                    <span className="eyebrow text-gold text-[0.5rem] md:text-[0.65rem] mb-0.5 md:mb-1.5">
+                      {label}
+                    </span>
+                    <span
+                      className="text-brown text-[0.6rem] md:text-base leading-tight md:leading-snug break-words"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {value}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-brown/10">
+            <p className="eyebrow text-gold text-[0.55rem] md:text-[0.65rem] mb-1.5 md:mb-2">
+              About {p.name}
+            </p>
+            <p className="text-brown/75 text-[0.65rem] md:text-sm leading-relaxed">
+              {ABOUT[p.id] ?? p.feeling}
+            </p>
           </div>
         </div>
 
-        <div className="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-brown/10">
-          <p className="eyebrow text-gold text-[0.55rem] md:text-[0.65rem] mb-1.5 md:mb-2">About {p.name}</p>
-          <p className="text-brown/75 text-[0.65rem] md:text-sm leading-relaxed">
-            {ABOUT[p.id] ?? p.feeling}
-          </p>
-        </div>
-      </div>
-
-      <Link
-        to="/shop/$productId"
-        params={{ productId: p.id }}
-        className={`col-span-7 ${reverse ? "order-1" : "order-2"} group relative block overflow-hidden bg-cream h-full min-h-[70vw] md:min-h-[560px] rounded-xl md:rounded-3xl`}
-      >
-        <img
-          src={p.image}
-          alt={p.name}
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-[1.04]"
-        />
-        {p.bestseller && (
-          <span className="absolute top-2 left-2 md:top-6 md:left-6 eyebrow text-[0.5rem] md:text-[0.625rem] bg-ivory/90 backdrop-blur-sm text-brown px-2 py-1 md:px-3 md:py-1.5">
-            Bestseller
-          </span>
-        )}
-      </Link>
+        <Link
+          to="/shop/$productId"
+          params={{ productId: p.id }}
+          className={`col-span-7 ${reverse ? "order-1" : "order-2"} group relative block overflow-hidden bg-cream h-full min-h-[70vw] md:min-h-[560px] rounded-xl md:rounded-3xl`}
+        >
+          <img
+            src={p.image}
+            alt={p.name}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-[1.04]"
+          />
+          {p.bestseller && (
+            <span className="absolute top-2 left-2 md:top-6 md:left-6 eyebrow text-[0.5rem] md:text-[0.625rem] bg-ivory/90 backdrop-blur-sm text-brown px-2 py-1 md:px-3 md:py-1.5">
+              Bestseller
+            </span>
+          )}
+        </Link>
       </div>
 
       {/* Scent attributes — full-width stretch */}
@@ -330,7 +568,9 @@ function EditorialCard({
 
       {/* Available In — full-width row */}
       <div>
-        <p className="eyebrow text-gold text-[0.55rem] md:text-[0.65rem] mb-3 md:mb-4">Available in</p>
+        <p className="eyebrow text-gold text-[0.55rem] md:text-[0.65rem] mb-3 md:mb-4">
+          Available in
+        </p>
         <ul className="grid grid-cols-3 gap-1.5 md:gap-3">
           {p.availableIn.slice(0, 3).map((f) => {
             const price = FORMAT_PRICE[f] ?? p.price;
@@ -346,10 +586,18 @@ function EditorialCard({
                   className="w-full h-full flex items-center gap-1.5 md:gap-3 border border-brown/15 bg-cream/40 rounded-lg p-1.5 md:p-3 text-left hover:border-brown/40 hover:bg-cream transition-colors"
                 >
                   <span className="block w-9 h-9 md:w-16 md:h-16 shrink-0 overflow-hidden rounded-md bg-cream">
-                    <img src={p.image} alt="" loading="lazy" className="w-full h-full object-cover" />
+                    <img
+                      src={p.image}
+                      alt=""
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
                   </span>
                   <span className="min-w-0 flex-1 leading-tight">
-                    <span className="block text-brown text-[0.6rem] md:text-base truncate" style={{ fontFamily: "var(--font-display)" }}>
+                    <span
+                      className="block text-brown text-[0.6rem] md:text-base truncate"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
                       {FORMAT_ML[f]}
                     </span>
                     <span className="block text-brown/60 text-[0.55rem] md:text-sm truncate">
@@ -413,9 +661,7 @@ function ScentAttributes({ p }: { p: Product }) {
               }`}
             >
               <Icon className="w-6 h-6 text-gold mb-2.5" strokeWidth={1.25} />
-              <span className="eyebrow text-gold text-[0.6rem] mb-1.5">
-                {label}
-              </span>
+              <span className="eyebrow text-gold text-[0.6rem] mb-1.5">{label}</span>
               <span
                 className="text-brown text-sm leading-snug whitespace-nowrap"
                 style={{ fontFamily: "var(--font-display)" }}
@@ -424,7 +670,7 @@ function ScentAttributes({ p }: { p: Product }) {
               </span>
             </div>
           ))}
-          </div>
+        </div>
       </div>
     </div>
   );
@@ -436,10 +682,14 @@ function RitualRow({ p }: { p: Product }) {
   if (items.length === 0) return null;
   return (
     <div className="pt-6 md:pt-14 border-t border-brown/10">
-      <p className="eyebrow text-gold text-[0.55rem] md:text-[0.7rem] mb-2 md:mb-3">Complete The Ritual</p>
+      <p className="eyebrow text-gold text-[0.55rem] md:text-[0.7rem] mb-2 md:mb-3">
+        Complete The Ritual
+      </p>
       <p className="text-brown text-[0.7rem] md:text-lg leading-snug md:leading-relaxed mb-4 md:mb-8">
         Layer <span className="text-brown font-medium">{p.name}</span>{" "}
-        <span className="text-brown/75">for a longer lasting, more immersive scent experience.</span>
+        <span className="text-brown/75">
+          for a longer lasting, more immersive scent experience.
+        </span>
       </p>
       <div className="grid grid-cols-4 gap-1.5 md:gap-5">
         {items.map((f) => {
@@ -501,7 +751,9 @@ function YouMayAlsoLike({ currentId }: { currentId: string }) {
   if (items.length === 0) return null;
   return (
     <div className="pt-6 md:pt-14 border-t border-brown/10">
-      <p className="eyebrow text-gold text-[0.55rem] md:text-[0.7rem] mb-3 md:mb-8">You May Also Like</p>
+      <p className="eyebrow text-gold text-[0.55rem] md:text-[0.7rem] mb-3 md:mb-8">
+        You May Also Like
+      </p>
       <div className="grid grid-cols-4 gap-1.5 md:gap-5">
         {items.map((o) => (
           <Link
