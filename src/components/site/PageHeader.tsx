@@ -53,10 +53,40 @@ export function PageHeader({
   }, [backgroundImage, backgroundImages]);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = videoPlaybackRate;
-    }
-  }, [videoPlaybackRate]);
+    const video = videoRef.current;
+    if (!video || !backgroundVideo) return;
+
+    // iOS Safari can reject autoplay when muted/inline flags are not explicit on the DOM node.
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "true");
+
+    // Safari is stricter about playback rate ranges than desktop Chromium.
+    const clampedRate = Math.min(2, Math.max(0.5, videoPlaybackRate));
+    video.playbackRate = clampedRate;
+
+    const tryPlay = () => {
+      const playPromise = video.play();
+      if (!playPromise || typeof playPromise.catch !== "function") return;
+
+      playPromise.catch(() => {
+        // If autoplay is blocked, retry once after the first user gesture.
+        const resumeOnGesture = () => {
+          void video.play().catch(() => undefined);
+          window.removeEventListener("touchstart", resumeOnGesture);
+          window.removeEventListener("click", resumeOnGesture);
+        };
+
+        window.addEventListener("touchstart", resumeOnGesture, { once: true });
+        window.addEventListener("click", resumeOnGesture, { once: true });
+      });
+    };
+
+    tryPlay();
+  }, [backgroundVideo, videoPlaybackRate]);
 
   useEffect(() => {
     setActiveImageIndex(0);
@@ -99,6 +129,7 @@ export function PageHeader({
           muted
           loop
           playsInline
+          preload="metadata"
           className="absolute inset-0 h-full w-full object-cover"
         >
           <source src={backgroundVideo} type="video/mp4" />
