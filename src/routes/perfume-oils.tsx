@@ -121,7 +121,7 @@ export const Route = createFileRoute("/perfume-oils")({
 function PerfumeOilsPage() {
   const visibleMoods = moods.filter((m) => m.key !== "discovery");
   const heroSlides = useMemo<HeroSlide[]>(() => {
-    const selected = perfumeOils.slice(0, 4);
+    const selected = perfumeOils.slice(0, 9);
     return selected.map((oil, index) => ({
       id: oil.id,
       image: index === 0 ? perfumeHeroImage : oil.image,
@@ -391,9 +391,6 @@ function PremiumPerfumeHero({
                     transition={{ duration: 1.2, ease: swapEase }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/34 to-transparent" />
-                  <span className="absolute left-2.5 bottom-2 eyebrow text-[0.62rem] tracking-[0.24em] text-ivory/95">
-                    {slide.number}
-                  </span>
                 </motion.button>
               );
             })}
