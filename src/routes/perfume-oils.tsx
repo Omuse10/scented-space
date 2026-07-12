@@ -226,7 +226,7 @@ function PremiumPerfumeHero({
 
   const activeIndex = order[0] ?? 0;
   const activeSlide = slides[activeIndex];
-  const previewIndexes = order.slice(1, 4);
+  const previewIndexes = order.slice(1);
 
   const swapEase: [number, number, number, number] = [0.87, 0, 0.13, 1];
 
@@ -286,150 +286,120 @@ function PremiumPerfumeHero({
 
   return (
     <section
-      className="relative h-[100svh] overflow-hidden bg-[#1f1915] text-ivory"
+      className="relative h-[100svh] w-screen overflow-hidden bg-[#1f1915] text-ivory"
       onPointerDown={markInteraction}
       onTouchStart={markInteraction}
     >
       <LayoutGroup>
-        <AnimatePresence mode="wait">
+        <motion.div
+          key={`active-wrap-${activeSlide.id}`}
+          className="absolute inset-0 z-0"
+          initial={false}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: swapEase }}
+        >
           <motion.div
-            key={activeSlide.id}
-            className="absolute inset-0"
-            initial={{ opacity: 0.2, scale: 1.06, filter: "blur(8px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, scale: 0.92, filter: "blur(8px)" }}
+            layoutId={`hero-image-${activeSlide.id}`}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${activeSlide.image})` }}
             transition={{ duration: 1.2, ease: swapEase }}
-          >
-            <motion.div
-              layoutId={`hero-image-${activeSlide.id}`}
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${activeSlide.image})` }}
-            />
-          </motion.div>
-        </AnimatePresence>
-      </LayoutGroup>
+          />
+        </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/68 via-black/42 to-black/26" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_25%,rgba(255,255,255,0.08),transparent_40%)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/68 via-black/44 to-black/28" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_24%,rgba(255,255,255,0.08),transparent_42%)]" />
 
-      <motion.div
-        className="relative z-10 h-full"
-        drag="x"
-        dragElastic={0.06}
-        dragConstraints={{ left: 0, right: 0 }}
-        onDragStart={markInteraction}
-        onDragEnd={(_, info) => {
-          const swipe = info.offset.x + info.velocity.x * 120;
-          if (swipe < -120) {
-            markInteraction();
-            goNext();
-            return;
-          }
-          if (swipe > 120) {
-            markInteraction();
-            goPrev();
-          }
-        }}
-      >
-        <div className="flex h-full items-center px-5 md:px-10 lg:px-16 pt-24 md:pt-28 pb-24">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`content-${activeSlide.id}`}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 24 }}
-              transition={{ duration: 1.05, ease: swapEase }}
-              className="max-w-3xl"
-            >
-              <p className="eyebrow text-[0.68rem] md:text-[0.75rem] tracking-[0.3em] text-gold/95 mb-5">
-                Perfume Oils · {activeSlide.number}
-              </p>
-              <h1
-                className="text-[clamp(2.2rem,6.5vw,5.4rem)] leading-[1.02] tracking-[-0.02em] text-ivory"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {activeSlide.title.split(" ").slice(0, -1).join(" ")}{" "}
-                <span className="serif-italic text-gold">
-                  {activeSlide.title.split(" ").slice(-1).join(" ")}
-                </span>
-              </h1>
-              <p className="mt-6 text-ivory/90 text-[0.98rem] md:text-lg max-w-xl leading-relaxed">
-                {activeSlide.description}
-              </p>
-              <div className="mt-8">
-                <Link
-                  to={activeSlide.ctaTo}
-                  params={activeSlide.ctaParams}
-                  className="inline-flex items-center gap-2 bg-terracotta text-ivory px-7 py-4 eyebrow tracking-[0.18em] hover:bg-gold hover:text-brown transition-colors"
-                >
-                  {activeSlide.ctaLabel}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </motion.div>
-
-      <div className="absolute bottom-8 right-5 md:right-10 z-20 flex items-end gap-3 md:gap-4">
-        {previewIndexes.map((slideIndex, stackIndex) => {
-          const slide = slides[slideIndex];
-          const scale = 1 - stackIndex * 0.03;
-          return (
-            <motion.button
-              key={slide.id}
-              type="button"
-              onClick={() => {
-                markInteraction();
-                promoteSlide(slideIndex);
-              }}
-              className="relative h-[112px] w-[178px] md:h-[130px] md:w-[206px] rounded-xl overflow-hidden border border-ivory/20 bg-black/20 backdrop-blur-md shadow-[0_20px_48px_-30px_rgba(0,0,0,0.8)]"
-              style={{
-                zIndex: 30 - stackIndex,
-              }}
-              initial={{ opacity: 0, y: 24, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale }}
-              transition={{ duration: 1.15, ease: swapEase }}
-              whileHover={{ y: -6 }}
-            >
+        <motion.div
+          className="relative z-10 h-full"
+          drag="x"
+          dragElastic={0.08}
+          dragConstraints={{ left: 0, right: 0 }}
+          onDragStart={markInteraction}
+          onDragEnd={(_, info) => {
+            const swipe = info.offset.x + info.velocity.x * 120;
+            if (swipe < -120) {
+              markInteraction();
+              goNext();
+              return;
+            }
+            if (swipe > 120) {
+              markInteraction();
+              goPrev();
+            }
+          }}
+        >
+          <div className="flex h-full items-center px-5 md:px-10 lg:px-16 pt-24 md:pt-28 pb-44 md:pb-48">
+            <AnimatePresence mode="sync" initial={false}>
               <motion.div
-                layoutId={`hero-image-${slide.id}`}
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${slide.image})` }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-transparent" />
-              <span className="absolute left-3 bottom-2 eyebrow text-[0.64rem] tracking-[0.26em] text-ivory/95">
-                {slide.number}
-              </span>
-            </motion.button>
-          );
-        })}
-      </div>
+                key={`content-${activeSlide.id}`}
+                initial={{ opacity: 0, y: 26 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 18 }}
+                transition={{ duration: 0.85, delay: 0.28, ease: "easeInOut" }}
+                className="max-w-3xl"
+              >
+                <p className="eyebrow text-[0.68rem] md:text-[0.75rem] tracking-[0.3em] text-gold/95 mb-5">
+                  Perfume Oils · {activeSlide.number}
+                </p>
+                <h1
+                  className="text-[clamp(2.2rem,6.5vw,5.4rem)] leading-[1.02] tracking-[-0.02em] text-ivory"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {activeSlide.title.split(" ").slice(0, -1).join(" ")}{" "}
+                  <span className="serif-italic text-gold">
+                    {activeSlide.title.split(" ").slice(-1).join(" ")}
+                  </span>
+                </h1>
+                <p className="mt-6 text-ivory/90 text-[0.98rem] md:text-lg max-w-xl leading-relaxed">
+                  {activeSlide.description}
+                </p>
+                <div className="mt-8">
+                  <Link
+                    to={activeSlide.ctaTo}
+                    params={activeSlide.ctaParams}
+                    className="inline-flex items-center gap-2 bg-terracotta text-ivory px-7 py-4 eyebrow tracking-[0.18em] hover:bg-gold hover:text-brown transition-colors"
+                  >
+                    {activeSlide.ctaLabel}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </motion.div>
 
-      <div className="absolute bottom-8 left-5 md:left-10 z-20 flex items-center gap-2">
-        <button
-          type="button"
-          aria-label="Previous slide"
-          onClick={() => {
-            markInteraction();
-            goPrev();
-          }}
-          className="h-11 w-11 rounded-full border border-ivory/30 bg-black/25 backdrop-blur text-ivory hover:bg-black/35 transition-colors"
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          aria-label="Next slide"
-          onClick={() => {
-            markInteraction();
-            goNext();
-          }}
-          className="h-11 w-11 rounded-full border border-ivory/30 bg-black/25 backdrop-blur text-ivory hover:bg-black/35 transition-colors"
-        >
-          →
-        </button>
-      </div>
+        <div className="absolute bottom-6 left-4 right-4 md:left-8 md:right-8 lg:left-10 lg:right-10 z-20 rounded-2xl border border-ivory/20 bg-black/28 backdrop-blur-xl shadow-[0_24px_56px_-35px_rgba(0,0,0,0.85)] px-3 py-3 md:px-5 md:py-4">
+          <div className="flex items-center gap-3 md:gap-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {previewIndexes.map((slideIndex) => {
+              const slide = slides[slideIndex];
+              return (
+                <motion.button
+                  key={slide.id}
+                  type="button"
+                  onClick={() => {
+                    markInteraction();
+                    promoteSlide(slideIndex);
+                  }}
+                  className="relative h-[88px] w-[132px] md:h-[98px] md:w-[154px] shrink-0 rounded-xl overflow-hidden border border-ivory/20 bg-black/20"
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                >
+                  <motion.div
+                    layoutId={`hero-image-${slide.id}`}
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${slide.image})` }}
+                    transition={{ duration: 1.2, ease: swapEase }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/34 to-transparent" />
+                  <span className="absolute left-2.5 bottom-2 eyebrow text-[0.62rem] tracking-[0.24em] text-ivory/95">
+                    {slide.number}
+                  </span>
+                </motion.button>
+              );
+            })}
+          </div>
+        </div>
+      </LayoutGroup>
     </section>
   );
 }
