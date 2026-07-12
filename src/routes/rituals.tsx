@@ -38,6 +38,7 @@ function RitualsPage() {
         }
         intro="Beautiful scent begins with beautiful skin. Each ritual is the full layering — composed in one of our signature scents, in one box."
         backgroundVideo={scentedVideo}
+        contentClassName="max-w-xl md:max-w-2xl md:bg-brown/18 md:backdrop-blur-[1.5px] md:ring-1 md:ring-ivory/10 md:rounded-sm md:px-6 md:py-7"
         isExpanded={true}
         videoPlaybackRate={0.45}
       />

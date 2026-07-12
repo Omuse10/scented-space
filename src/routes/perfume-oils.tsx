@@ -336,7 +336,7 @@ function PremiumPerfumeHero({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 18 }}
                 transition={{ duration: 0.85, delay: 0.28, ease: "easeInOut" }}
-                className="max-w-3xl"
+                className="max-w-3xl px-5 py-6 md:px-6 md:py-7 md:bg-brown/18 md:backdrop-blur-[1.5px] md:ring-1 md:ring-ivory/10 md:rounded-sm"
               >
                 <p className="eyebrow text-[0.68rem] md:text-[0.75rem] tracking-[0.3em] text-gold/95 mb-5">
                   Perfume Oils · {activeSlide.number}
