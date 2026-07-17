@@ -43,6 +43,7 @@ function ShopPage() {
     <>
       <PageHeader
         eyebrow="The Atelier"
+        align="left"
         title={
           <>
             Shop the <span className="serif-italic text-gold">house.</span>
@@ -50,7 +51,7 @@ function ShopPage() {
         }
         intro="Begin where it fits — by feeling, with a Discovery Set, a complete Ritual, or a single perfume oil."
         backgroundVideo={shopHeroVideo}
-        contentClassName="max-w-xl md:max-w-2xl md:bg-brown/18 md:backdrop-blur-[1.5px] md:ring-1 md:ring-ivory/10 md:rounded-sm md:px-6 md:py-7"
+        contentClassName="max-w-xl md:max-w-2xl md:mr-auto md:bg-brown/18 md:backdrop-blur-[1.5px] md:ring-1 md:ring-ivory/10 md:rounded-sm md:px-6 md:py-7"
         isExpanded={true}
         videoPlaybackRate={0.5}
       />

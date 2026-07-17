@@ -153,7 +153,9 @@ export function PageHeader({
       {/* Gradient Overlay */}
       <div className={overlayClass} />
 
-      <div className={`relative z-10 mx-auto max-w-7xl px-5 md:px-10 ${center ? "text-center" : ""}`}>
+      <div
+        className={`relative z-10 max-w-7xl px-5 md:px-10 ${center ? "mx-auto text-center" : "mr-auto"}`}
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -101,10 +101,11 @@ function Coverflow({ items }: { items: CoverItem[] }) {
     loop: true,
     containScroll: false,
     startIndex: initialIndex,
-    duration: 45,
+    duration: 60,
     draggable: true,
-    dragFree: true,
-    dragThreshold: 10,
+    dragFree: false,
+    dragThreshold: 6,
+    skipSnaps: false,
     watchDrag: true,
   });
   const [selected, setSelected] = useState(initialIndex);
@@ -208,7 +209,7 @@ function Coverflow({ items }: { items: CoverItem[] }) {
             return (
               <li
                 key={`${p.id}-${i}`}
-                className={`relative shrink-0 grow-0 ${config.basis} ${config.margin} transition-all duration-500 ease-out`}
+                className={`relative shrink-0 grow-0 ${config.basis} ${config.margin} transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]`}
                 style={{
                   opacity: config.opacity,
                   zIndex: config.zIndex,
@@ -226,7 +227,7 @@ function Coverflow({ items }: { items: CoverItem[] }) {
                       src={p.image}
                       alt={p.name}
                       loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                     />
                   </div>
                   <div className="px-5 py-5 md:px-7 md:py-6 flex items-end justify-between gap-4 bg-ivory">

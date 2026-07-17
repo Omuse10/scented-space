@@ -220,13 +220,17 @@ function PremiumPerfumeHero({
   slides: HeroSlide[];
   autoPlayMs?: number;
 }) {
-  const [order, setOrder] = useState<number[]>(slides.map((_, index) => index));
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isInteracting, setIsInteracting] = useState(false);
+  const [showDecor, setShowDecor] = useState(false);
   const interactionTimerRef = useRef<number | null>(null);
 
-  const activeIndex = order[0] ?? 0;
   const activeSlide = slides[activeIndex];
-  const previewIndexes = order.slice(1);
+  const prevIndex = (activeIndex - 1 + slides.length) % slides.length;
+  const nextIndex = (activeIndex + 1) % slides.length;
+  const previewIndexes = slides
+    .map((_, index) => (activeIndex + index + 1) % slides.length)
+    .slice(0, Math.max(slides.length - 1, 0));
 
   const swapEase: [number, number, number, number] = [0.87, 0, 0.13, 1];
 
@@ -243,25 +247,17 @@ function PremiumPerfumeHero({
   }, []);
 
   const goNext = useCallback(() => {
-    setOrder((prev) => {
-      if (prev.length <= 1) return prev;
-      return [...prev.slice(1), prev[0]];
-    });
-  }, []);
+    if (slides.length <= 1) return;
+    setActiveIndex((prev) => (prev + 1) % slides.length);
+  }, [slides.length]);
 
   const goPrev = useCallback(() => {
-    setOrder((prev) => {
-      if (prev.length <= 1) return prev;
-      return [prev[prev.length - 1], ...prev.slice(0, -1)];
-    });
-  }, []);
+    if (slides.length <= 1) return;
+    setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  }, [slides.length]);
 
   const promoteSlide = useCallback((targetIndex: number) => {
-    setOrder((prev) => {
-      const targetPos = prev.indexOf(targetIndex);
-      if (targetPos <= 0) return prev;
-      return [...prev.slice(targetPos), ...prev.slice(0, targetPos)];
-    });
+    setActiveIndex(targetIndex);
   }, []);
 
   useEffect(() => {
@@ -282,6 +278,20 @@ function PremiumPerfumeHero({
     };
   }, []);
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowDecor(true), 150);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    // Warm the active neighborhood first so the hero paints quickly.
+    [activeSlide, slides[nextIndex], slides[prevIndex]].forEach((slide) => {
+      if (!slide) return;
+      const img = new Image();
+      img.src = slide.image;
+    });
+  }, [activeSlide, nextIndex, prevIndex, slides]);
+
   if (!activeSlide) return null;
 
   return (
@@ -291,20 +301,27 @@ function PremiumPerfumeHero({
       onTouchStart={markInteraction}
     >
       <LayoutGroup>
-        <motion.div
-          key={`active-wrap-${activeSlide.id}`}
-          className="absolute inset-0 z-0"
-          initial={false}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: swapEase }}
-        >
-          <motion.div
-            layoutId={`hero-image-${activeSlide.id}`}
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${activeSlide.image})` }}
-            transition={{ duration: 1.2, ease: swapEase }}
-          />
-        </motion.div>
+        {slides.map((slide, index) => {
+          const isActive = index === activeIndex;
+          const isAdjacent = index === prevIndex || index === nextIndex;
+          if (!isActive && !isAdjacent) return null;
+          if (!isActive && !showDecor) return null;
+          return (
+            <motion.div
+              key={`hero-layer-${slide.id}`}
+              className="absolute inset-0 z-0"
+              initial={false}
+              animate={{ opacity: isActive ? 1 : 0, scale: isActive ? 1 : 1.015 }}
+              transition={{ duration: 1.1, ease: swapEase }}
+              style={{ willChange: "opacity, transform" }}
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${slide.image})` }}
+              />
+            </motion.div>
+          );
+        })}
 
         <div className="absolute inset-0 bg-gradient-to-r from-black/68 via-black/44 to-black/28" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_24%,rgba(255,255,255,0.08),transparent_42%)]" />
@@ -332,10 +349,10 @@ function PremiumPerfumeHero({
             <AnimatePresence mode="sync" initial={false}>
               <motion.div
                 key={`content-${activeSlide.id}`}
-                initial={{ opacity: 0, y: 26 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 18 }}
-                transition={{ duration: 0.85, delay: 0.28, ease: "easeInOut" }}
+                exit={{ opacity: 0, y: 12 }}
+                transition={{ duration: 0.55, delay: 0.1, ease: "easeOut" }}
                 className="max-w-3xl px-5 py-6 md:px-6 md:py-7 md:bg-brown/18 md:backdrop-blur-[1.5px] md:ring-1 md:ring-ivory/10 md:rounded-sm"
               >
                 <p className="eyebrow text-[0.68rem] md:text-[0.75rem] tracking-[0.3em] text-gold/95 mb-5">
@@ -368,7 +385,9 @@ function PremiumPerfumeHero({
           </div>
         </motion.div>
 
-        <div className="absolute bottom-6 left-4 right-4 md:left-8 md:right-8 lg:left-10 lg:right-10 z-20 rounded-2xl border border-ivory/20 bg-black/28 backdrop-blur-xl shadow-[0_24px_56px_-35px_rgba(0,0,0,0.85)] px-3 py-3 md:px-5 md:py-4">
+        <div
+          className={`absolute bottom-6 left-4 right-4 md:left-8 md:right-8 lg:left-10 lg:right-10 z-20 rounded-2xl border border-ivory/20 bg-black/28 backdrop-blur-xl shadow-[0_24px_56px_-35px_rgba(0,0,0,0.85)] px-3 py-3 md:px-5 md:py-4 transition-opacity duration-300 ${showDecor ? "opacity-100" : "opacity-0"}`}
+        >
           <div className="flex items-center gap-3 md:gap-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {previewIndexes.map((slideIndex) => {
               const slide = slides[slideIndex];
@@ -384,11 +403,9 @@ function PremiumPerfumeHero({
                   whileHover={{ y: -3 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
                 >
-                  <motion.div
-                    layoutId={`hero-image-${slide.id}`}
+                  <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: `url(${slide.image})` }}
-                    transition={{ duration: 1.2, ease: swapEase }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/34 to-transparent" />
                 </motion.button>

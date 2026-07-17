@@ -62,6 +62,7 @@ function BodyPage() {
     <>
       <PageHeader
         eyebrow="Body Collection"
+        align="left"
         title={
           <>
             The body, <span className="serif-italic text-gold">prepared.</span>
@@ -69,7 +70,7 @@ function BodyPage() {
         }
         intro="Cleansed, hydrated, sealed — each step composed in our signature scents, so the fragrance lives on the skin from morning until evening."
         backgroundVideo={scentedVideo}
-        contentClassName="max-w-xl md:max-w-2xl md:bg-brown/18 md:backdrop-blur-[1.5px] md:ring-1 md:ring-ivory/10 md:rounded-sm md:px-6 md:py-7"
+        contentClassName="max-w-xl md:max-w-2xl md:mr-auto md:bg-brown/18 md:backdrop-blur-[1.5px] md:ring-1 md:ring-ivory/10 md:rounded-sm md:px-6 md:py-7"
         isExpanded={true}
         videoPlaybackRate={0.45}
       />
