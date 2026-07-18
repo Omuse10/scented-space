@@ -155,9 +155,9 @@ export function ShopByFeelingStage() {
 
   return (
     <section data-tour="mood-filter" className="bg-[#150E08]">
-      <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-12 py-14 md:py-20 lg:py-24">
+      <div className="mx-auto max-w-[1280px] px-4 md:px-8 lg:px-12 py-11 md:py-15 lg:py-16">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
+        <div className="text-center mb-7 md:mb-11">
           <div className="flex items-center justify-center gap-3 mb-4">
             <span className="h-px w-6 md:w-8 bg-[#C9A36A]/60" />
             <span className="eyebrow text-[0.65rem] md:text-[0.7rem] text-[#C9A36A] tracking-[0.3em]">
@@ -178,7 +178,7 @@ export function ShopByFeelingStage() {
         <div
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
-          className="relative overflow-hidden rounded-2xl md:rounded-3xl ring-1 ring-[#C9A36A]/15 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)] h-[640px] sm:h-[720px] lg:h-[640px] touch-pan-y select-none"
+          className="relative overflow-hidden rounded-2xl md:rounded-3xl ring-1 ring-[#C9A36A]/15 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)] h-[540px] sm:h-[600px] lg:h-[520px] xl:h-[580px] touch-pan-y select-none"
         >
           {/* Crossfading background images */}
           <AnimatePresence>
@@ -193,7 +193,7 @@ export function ShopByFeelingStage() {
               <img
                 src={active.image}
                 alt={active.title}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover object-[center_24%] lg:object-[center_32%] xl:object-[center_28%]"
               />
               {/* Gradient overlays — full-bleed on all viewports */}
               <div className="absolute inset-0 hidden lg:block bg-gradient-to-r from-[#150E08]/85 via-[#150E08]/35 to-transparent" />
@@ -202,7 +202,7 @@ export function ShopByFeelingStage() {
           </AnimatePresence>
 
           {/* Content overlay */}
-          <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-8 md:p-12 lg:p-14 pb-40 sm:pb-32 md:pb-32 lg:pb-24">
+          <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-8 md:p-10 lg:p-11 pb-24 sm:pb-26 md:pb-26 lg:pb-18">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.key}
@@ -225,7 +225,7 @@ export function ShopByFeelingStage() {
 
                 {/* Title */}
                 <h3
-                  className="italic text-[#F4ECE0] text-[2.5rem] sm:text-[3rem] md:text-[4rem] lg:text-[4.5rem] leading-[0.98] tracking-[-0.02em]"
+                  className="italic text-[#F4ECE0] text-[2.1rem] sm:text-[2.6rem] md:text-[3.2rem] lg:text-[3.7rem] leading-[0.98] tracking-[-0.02em]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {active.title}
@@ -233,7 +233,7 @@ export function ShopByFeelingStage() {
 
                 {/* Tagline */}
                 <p
-                  className="italic text-[#F4ECE0]/65 mt-3 md:mt-4 text-base md:text-lg lg:text-xl"
+                  className="italic text-[#F4ECE0]/65 mt-3 md:mt-4 text-base md:text-lg lg:text-lg"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {active.tagline}
