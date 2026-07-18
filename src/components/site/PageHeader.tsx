@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 type Props = {
   eyebrow: string;
@@ -41,6 +41,8 @@ export function PageHeader({
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const headingId = useId();
+  const introId = useId();
 
   const heroImages = useMemo(() => {
     if (backgroundImages && backgroundImages.length > 0) {
@@ -112,6 +114,8 @@ export function PageHeader({
 
   return (
     <section
+      aria-labelledby={headingId}
+      aria-describedby={intro ? introId : undefined}
       className={`relative text-ivory ${paddingClass} overflow-hidden ${heightClass}`}
       style={
         heroImages.length > 0 || backgroundVideo
@@ -122,33 +126,35 @@ export function PageHeader({
       }
     >
       {/* Background Image or Video */}
-      {backgroundVideo && (
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src={backgroundVideo} type="video/mp4" />
-        </video>
-      )}
-      
-      {heroImages.length > 0 && !backgroundVideo && (
-        <>
-          {heroImages.map((imageUrl, idx) => (
-            <div
-              key={imageUrl + idx}
-              className={`absolute inset-0 bg-cover ${backgroundPositionClassName ?? "bg-center"} bg-no-repeat transition-opacity duration-1000 ${
-                idx === activeImageIndex ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ backgroundImage: `url(${imageUrl})` }}
-            />
-          ))}
-        </>
-      )}
+      <div aria-hidden="true" className="absolute inset-0">
+        {backgroundVideo && (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src={backgroundVideo} type="video/mp4" />
+          </video>
+        )}
+
+        {heroImages.length > 0 && !backgroundVideo && (
+          <>
+            {heroImages.map((imageUrl, idx) => (
+              <div
+                key={imageUrl + idx}
+                className={`absolute inset-0 bg-cover ${backgroundPositionClassName ?? "bg-center"} bg-no-repeat transition-opacity duration-1000 ${
+                  idx === activeImageIndex ? "opacity-100" : "opacity-0"
+                }`}
+                style={{ backgroundImage: `url(${imageUrl})` }}
+              />
+            ))}
+          </>
+        )}
+      </div>
       
       {/* Gradient Overlay */}
       <div className={overlayClass} />
@@ -167,9 +173,9 @@ export function PageHeader({
             <span className="eyebrow text-ivory/90">{eyebrow}</span>
             {center && <span className="hairline" />}
           </div>
-          <h1 className={`display-xl text-ivory ${titleClassName ?? ""}`}>{title}</h1>
+          <h1 id={headingId} className={`display-xl text-ivory ${titleClassName ?? ""}`}>{title}</h1>
           {intro && (
-            <p className={`mt-8 text-ivory/85 leading-relaxed md:text-lg max-w-2xl ${center ? "mx-auto" : ""} ${introClassName ?? ""}`}>
+            <p id={introId} className={`mt-8 text-ivory/85 leading-relaxed md:text-lg max-w-2xl ${center ? "mx-auto" : ""} ${introClassName ?? ""}`}>
               {intro}
             </p>
           )}

@@ -116,6 +116,9 @@ function RitualPage() {
         eyebrow="The Ritual"
         title={<>The art of <span className="serif-italic text-gold">scented skin.</span></>}
         intro="Fragrance is not a finishing touch. It is built — slowly, layer by layer. This is how scent is meant to live on the skin."
+        backgroundImage={ritualImg}
+        backgroundPositionClassName="bg-center md:bg-[center_20%]"
+        overlayClassName="absolute inset-0 bg-gradient-to-t from-brown/26 via-brown/10 to-transparent md:bg-gradient-to-r md:from-brown/24 md:via-brown/8 md:to-transparent"
         contentClassName="max-w-xl md:max-w-2xl md:bg-brown/18 md:backdrop-blur-[1.5px] md:ring-1 md:ring-ivory/10 md:rounded-sm md:px-6 md:py-7"
         isExpanded={true}
       />
