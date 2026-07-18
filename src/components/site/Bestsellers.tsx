@@ -10,16 +10,16 @@ export function Bestsellers({ variant = "grid" }: { variant?: "grid" | "carousel
   const isCarousel = variant === "carousel";
   return (
     <section className="bg-cream">
-      <div className="mx-auto max-w-7xl px-5 md:px-10 py-16 md:py-32">
+      <div className="mx-auto max-w-[1320px] px-5 md:px-10 py-14 md:py-24">
         {isCarousel ? (
-          <div className="text-center mb-10 md:mb-16">
+          <div className="text-center mb-8 md:mb-12">
             <div className="flex items-center justify-center gap-4 mb-5 md:mb-6">
               <span className="h-px w-10 md:w-14 bg-terracotta/60" />
               <span className="eyebrow text-terracotta">Best Sellers</span>
               <span className="h-px w-10 md:w-14 bg-terracotta/60" />
             </div>
             <h2 className="display-lg text-brown">Our Most Loved</h2>
-            <p className="mt-4 md:mt-5 text-brown/75 text-sm md:text-base max-w-xl mx-auto">
+            <p className="mt-4 md:mt-5 text-brown/75 text-sm md:text-base max-w-lg mx-auto">
               Discover the fragrances our customers can't stop choosing.
             </p>
           </div>
@@ -159,7 +159,7 @@ function Coverflow({ items }: { items: CoverItem[] }) {
         <ChevronRight className="w-5 h-5" />
       </button>
 
-      <div className="overflow-hidden -mx-5 md:-mx-10 py-4" ref={emblaRef}>
+      <div className="overflow-hidden -mx-5 md:-mx-10 py-2 md:py-3" ref={emblaRef}>
         <ul className="flex items-center will-change-transform">
           {loopedItems.map((p, i) => {
             const distance = distanceFrom(i);
@@ -168,8 +168,8 @@ function Coverflow({ items }: { items: CoverItem[] }) {
             const config =
               distance === 0
                 ? {
-                    basis: "basis-[40%] sm:basis-[40%] md:basis-[40%] lg:basis-[40%]",
-                    margin: "-mr-[10%] sm:-mr-[10%] md:-mr-[10%] lg:-mr-[10%]",
+                    basis: "basis-[36%] sm:basis-[36%] md:basis-[36%] lg:basis-[36%]",
+                    margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
                     opacity: 1,
                     zIndex: 10,
                     blur: 0,
@@ -178,8 +178,8 @@ function Coverflow({ items }: { items: CoverItem[] }) {
                   }
                 : distance === 1
                 ? {
-                    basis: "basis-[30%] sm:basis-[30%] md:basis-[30%] lg:basis-[30%]",
-                    margin: "-mr-[10%] sm:-mr-[10%] md:-mr-[10%] lg:-mr-[10%]",
+                    basis: "basis-[26%] sm:basis-[26%] md:basis-[26%] lg:basis-[26%]",
+                    margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
                     opacity: 1,
                     zIndex: 5,
                     blur: 0.5,
@@ -188,8 +188,8 @@ function Coverflow({ items }: { items: CoverItem[] }) {
                   }
                 : distance === 2
                 ? {
-                    basis: "basis-[20%] sm:basis-[20%] md:basis-[20%] lg:basis-[20%]",
-                    margin: "-mr-[10%] sm:-mr-[10%] md:-mr-[10%] lg:-mr-[10%]",
+                    basis: "basis-[18%] sm:basis-[18%] md:basis-[18%] lg:basis-[18%]",
+                    margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
                     opacity: 1,
                     zIndex: 1,
                     blur: 2,
@@ -197,8 +197,8 @@ function Coverflow({ items }: { items: CoverItem[] }) {
                     pointerEvents: "auto" as const,
                   }
                 : {
-                    basis: "basis-[20%] sm:basis-[20%] md:basis-[20%] lg:basis-[20%]",
-                    margin: "-mr-[10%] sm:-mr-[10%] md:-mr-[10%] lg:-mr-[10%]",
+                    basis: "basis-[18%] sm:basis-[18%] md:basis-[18%] lg:basis-[18%]",
+                    margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
                     opacity: 0,
                     zIndex: 0,
                     blur: 0,
@@ -220,35 +220,35 @@ function Coverflow({ items }: { items: CoverItem[] }) {
                 <Link
                   to="/shop/$productId"
                   params={{ productId: p.id }}
-                  className="group block rounded-2xl overflow-hidden bg-ivory shadow-[0_24px_60px_-24px_rgba(60,30,15,0.55)]"
+                  className="group block rounded-2xl overflow-hidden bg-ivory shadow-[0_18px_44px_-20px_rgba(60,30,15,0.5)]"
                 >
                   <div className="relative overflow-hidden bg-cocoa aspect-[4/5]">
                     <img
                       src={p.image}
                       alt={p.name}
                       loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-103"
                     />
                   </div>
-                  <div className="px-5 py-5 md:px-7 md:py-6 flex items-end justify-between gap-4 bg-ivory">
+                  <div className="px-4 py-4 md:px-6 md:py-5 flex items-end justify-between gap-4 bg-ivory">
                     <div className="min-w-0">
                       <h3
-                        className="text-brown text-2xl md:text-3xl leading-tight truncate"
+                        className="text-brown text-xl md:text-[1.7rem] leading-tight truncate"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
                         {p.name}
                       </h3>
-                      <p className="text-terracotta/85 text-xs md:text-sm mt-2 tracking-wide truncate">
+                      <p className="text-terracotta/85 text-[0.7rem] md:text-sm mt-2 tracking-wide truncate">
                         {p.noteSummary}
                       </p>
-                      <p className="text-brown/80 text-sm md:text-base mt-3 tracking-wider">
+                      <p className="text-brown/80 text-[0.75rem] md:text-[0.95rem] mt-2.5 tracking-wider">
                         KSh {p.price.toLocaleString()}
                       </p>
                     </div>
                     {isActive && (
                       <span
                         aria-hidden
-                        className="shrink-0 w-10 h-10 md:w-11 md:h-11 rounded-full bg-cocoa text-ivory grid place-items-center"
+                        className="shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-full bg-cocoa text-ivory grid place-items-center"
                       >
                         <ArrowRight className="w-4 h-4" />
                       </span>
