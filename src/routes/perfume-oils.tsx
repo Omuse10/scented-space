@@ -224,6 +224,7 @@ function PremiumPerfumeHero({
   const [isInteracting, setIsInteracting] = useState(false);
   const [showDecor, setShowDecor] = useState(false);
   const interactionTimerRef = useRef<number | null>(null);
+  const previewStripRef = useRef<HTMLDivElement | null>(null);
 
   const activeIndex = order[0] ?? 0;
   const activeSlide = slides[activeIndex];
@@ -296,6 +297,12 @@ function PremiumPerfumeHero({
       img.src = slide.image;
     });
   }, [activeSlide, previewIndexes, slides]);
+
+  useEffect(() => {
+    if (!previewStripRef.current) return;
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+    previewStripRef.current.scrollTo({ left: 0, behavior: "auto" });
+  }, [activeIndex]);
 
   if (!activeSlide) return null;
 
@@ -387,7 +394,10 @@ function PremiumPerfumeHero({
         <div
           className={`absolute bottom-6 left-4 right-4 md:left-8 md:right-8 lg:left-10 lg:right-10 z-20 rounded-2xl border border-ivory/20 bg-black/28 backdrop-blur-xl shadow-[0_24px_56px_-35px_rgba(0,0,0,0.85)] px-3 py-3 md:px-5 md:py-4 transition-opacity duration-300 ${showDecor ? "opacity-100" : "opacity-0"}`}
         >
-          <div className="flex items-center gap-3 md:gap-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div
+            ref={previewStripRef}
+            className="flex items-center gap-3 md:gap-4 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
             {previewIndexes.map((slideIndex) => {
               const slide = slides[slideIndex];
               return (
@@ -398,7 +408,7 @@ function PremiumPerfumeHero({
                     markInteraction();
                     promoteSlide(slideIndex);
                   }}
-                  className="relative h-[88px] w-[132px] md:h-[98px] md:w-[154px] shrink-0 rounded-xl overflow-hidden border border-ivory/20 bg-black/20"
+                  className="relative snap-start h-[92px] w-[140px] md:h-[98px] md:w-[154px] shrink-0 rounded-xl overflow-hidden border border-ivory/20 bg-black/20"
                   whileHover={{ y: -3 }}
                   transition={{ duration: 0.35, ease: "easeOut" }}
                 >
