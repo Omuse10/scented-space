@@ -2,10 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Bestsellers } from "@/components/site/Bestsellers";
+import { CatalogOnlyFragranceCard } from "@/components/site/CatalogOnlyFragranceCard";
 import {
   moods,
   oilsByMood,
   perfumeOils,
+  catalogOnlyFragrances,
+  fragranceCatalogue,
   FORMAT_LABEL,
   type Product,
   type Format,
@@ -39,7 +42,7 @@ const ABOUT: Record<string, string> = {
     "Whispering Petals is luminous and feminine. Lychee and pear lift a delicate bouquet of damask rose and peony, finished with a weightless white musk and soft amber.",
   thea: "Théa is sunlight through linen. Bright bergamot and green tea open onto tuberose and jasmine, settling into a clean white musk and warm vanilla wood.",
   "riviera-dreams":
-    "Riviera Dreams is fresh and effortless. Peony and pink pepper bloom over a quiet musk and cedar — easy to wear from a long afternoon into the evening.",
+    "Riviera Dream is fresh and effortless. Peony and pink pepper bloom over a quiet musk and cedar — easy to wear from a long afternoon into the evening.",
   lyra: "Lyra is soft, sunlit warmth. Ripe apricot and bergamot melt into jasmine and peach blossom, settling on a quiet amber and cashmere wood.",
   "velvet-elegance":
     "Velvet Elegance is sensual and magnetic. Saffron and pink pepper open onto hibiscus and rose damascena, wrapped in warm vanilla, patchouli and black amber.",
@@ -47,10 +50,6 @@ const ABOUT: Record<string, string> = {
     "Sensual Whispers is intimate and modern. Juicy pear meets rose and jasmine, settling skin-close into creamy sandalwood and soft musk.",
   "carmine-temptations":
     "Carmine Temptations is rich and unforgettable. Black cherry and bitter almond fold into rose absolute and plum, drying down to a slow, smoky amber and tonka.",
-  aurielle:
-    "Aurielle is gilded and slow. Saffron-warmed rose and iris dip into vanilla, amber and a whisper of oud for a long, opulent drydown.",
-  amara:
-    "Amara is bright at the top and warm at the base. Candied orange and bergamot open onto orange blossom and jasmine, settling into creamy vanilla, musk and amber.",
   cipher:
     "Cipher is composed and confident. Bright pineapple and blackcurrant lift over smoked birch and rose, settling into oakmoss, amber and musk for quiet authority.",
   griselle:
@@ -170,7 +169,7 @@ function PerfumeOilsPage() {
                 </div>
 
                 <div className="space-y-12 md:space-y-20">
-                  {items.slice(0, 2).map((p, i) => (
+                  {items.map((p, i) => (
                     <EditorialCard
                       key={p.id}
                       p={p}
@@ -196,6 +195,25 @@ function PerfumeOilsPage() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      <section id="catalogue" className="bg-cream border-t border-gold/20">
+        <div className="mx-auto max-w-7xl px-5 md:px-10 py-16 md:py-24">
+          <div className="mb-10 md:mb-14">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="hairline" />
+              <span className="eyebrow text-gold">The Complete Catalogue</span>
+            </div>
+            <h2 className="display-lg text-brown">
+              All <span className="serif-italic">{fragranceCatalogue.length} fragrances.</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-6">
+            {catalogOnlyFragrances.map((fragrance, index) => (
+              <CatalogOnlyFragranceCard key={fragrance.id} fragrance={fragrance} index={index} />
+            ))}
+          </div>
         </div>
       </section>
     </>
@@ -415,7 +433,10 @@ function PremiumPerfumeHero({
                   <motion.div
                     layoutId={`hero-image-${slide.id}`}
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${slide.image})`, willChange: "transform, opacity" }}
+                    style={{
+                      backgroundImage: `url(${slide.image})`,
+                      willChange: "transform, opacity",
+                    }}
                     transition={{ duration: 1.2, ease: swapEase }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/34 to-transparent" />

@@ -41,8 +41,7 @@ function DryBodyOilPage() {
         eyebrow="Dry Body Oil"
         title={
           <>
-            Lightweight. Silky.{" "}
-            <span className="serif-italic text-gold">Fast absorbing.</span>
+            Lightweight. Silky. <span className="serif-italic text-gold">Fast absorbing.</span>
           </>
         }
         isExpanded={true}
@@ -115,10 +114,7 @@ function DryBodyOilCard({ p, delay }: { p: Product; delay: number }) {
           </span>
         )}
       </Link>
-      <h3
-        className="text-brown text-xl md:text-2xl"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
+      <h3 className="text-brown text-xl md:text-2xl" style={{ fontFamily: "var(--font-display)" }}>
         <Link
           to="/shop/$productId"
           params={{ productId: p.id }}
@@ -130,12 +126,11 @@ function DryBodyOilCard({ p, delay }: { p: Product; delay: number }) {
       {p.inspiredBy && (
         <p className="text-brown/50 text-xs mt-1 serif-italic">
           Inspired by {p.inspiredBy}
+          {p.inspiredByBrand && ` — ${p.inspiredByBrand}`}
         </p>
       )}
       <p className="text-brown/65 text-sm mt-2 serif-italic">{p.noteSummary}</p>
-      <p className="mt-4 text-brown/80 text-sm tracking-wider">
-        KSh {p.price.toLocaleString()}
-      </p>
+      <p className="mt-4 text-brown/80 text-sm tracking-wider">KSh {p.price.toLocaleString()}</p>
     </motion.article>
   );
 }

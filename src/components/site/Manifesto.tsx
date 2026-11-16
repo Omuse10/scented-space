@@ -27,9 +27,7 @@ export function Manifesto() {
           >
             Fragrance is not what you wear.
             <br />
-            <span className="serif-italic text-terracotta">
-              It is the room you carry with you.
-            </span>
+            <span className="serif-italic text-terracotta">It is the room you carry with you.</span>
           </p>
           <span className="hairline mx-auto block mt-12" />
         </motion.div>

@@ -18,8 +18,7 @@ export const Route = createFileRoute("/rituals")({
       { property: "og:title", content: "Rituals — The Scented Space" },
       {
         property: "og:description",
-        content:
-          "Complete ritual collections — cleanse, hydrate, seal, scent.",
+        content: "Complete ritual collections — cleanse, hydrate, seal, scent.",
       },
     ],
   }),
@@ -61,13 +60,9 @@ function RitualBlock({ r, index }: { r: Ritual; index: number }) {
   const variantLabel = r.variants?.[variantIdx]?.label;
   const imageFirst = index % 2 === 0;
 
-  const imageWrapClass = imageFirst
-    ? "md:w-[55%] md:order-1"
-    : "md:w-[55%] md:order-2";
+  const imageWrapClass = imageFirst ? "md:w-[55%] md:order-1" : "md:w-[55%] md:order-2";
 
-  const contentWrapClass = imageFirst
-    ? "md:w-[45%] md:order-2"
-    : "md:w-[45%] md:order-1";
+  const contentWrapClass = imageFirst ? "md:w-[45%] md:order-2" : "md:w-[45%] md:order-1";
 
   return (
     <motion.div
@@ -78,12 +73,10 @@ function RitualBlock({ r, index }: { r: Ritual; index: number }) {
       transition={{ duration: 0.9, ease: "easeOut" }}
       className="border border-[#E8E1D9] scroll-mt-32 md:flex md:items-stretch"
     >
-      <div className={`${imageWrapClass} relative aspect-[5/6] md:aspect-auto md:min-h-[34rem] overflow-hidden bg-cream group`}>
-        <Link
-          to="/shop/$productId"
-          params={{ productId: r.id }}
-          className="absolute inset-0 block"
-        >
+      <div
+        className={`${imageWrapClass} relative aspect-[5/6] md:aspect-auto md:min-h-[34rem] overflow-hidden bg-cream group`}
+      >
+        <Link to="/shop/$productId" params={{ productId: r.id }} className="absolute inset-0 block">
           <img
             src={r.image}
             alt={r.name}
@@ -101,9 +94,7 @@ function RitualBlock({ r, index }: { r: Ritual; index: number }) {
         <div className="w-full p-6 md:p-8 lg:p-10">
           <span className="eyebrow text-gold">{r.moodLabel}</span>
           <h2 className="display-lg text-brown mt-3">{r.name}</h2>
-          <p className="mt-4 text-brown/80 leading-relaxed serif-italic">
-            {r.tagline}
-          </p>
+          <p className="mt-4 text-brown/80 leading-relaxed serif-italic">{r.tagline}</p>
           <p className="mt-3 text-brown/65 leading-relaxed">{r.story}</p>
 
           <ol className="mt-8 border-t border-brown/15">
@@ -112,9 +103,7 @@ function RitualBlock({ r, index }: { r: Ritual; index: number }) {
                 key={s.format + i}
                 className="flex items-baseline justify-between gap-6 border-b border-brown/10 py-3.5"
               >
-                <span className="eyebrow text-gold text-[0.625rem] w-6">
-                  0{i + 1}
-                </span>
+                <span className="eyebrow text-gold text-[0.625rem] w-6">0{i + 1}</span>
                 <span
                   className="flex-1 text-brown"
                   style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem" }}
@@ -147,15 +136,10 @@ function RitualBlock({ r, index }: { r: Ritual; index: number }) {
           )}
 
           <div className="mt-8 flex items-baseline gap-3">
-            <span
-              className="text-brown text-2xl"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
+            <span className="text-brown text-2xl" style={{ fontFamily: "var(--font-display)" }}>
               KSh {r.price.toLocaleString()}
             </span>
-            <span className="eyebrow text-brown/50 text-[0.625rem]">
-              Complete Ritual
-            </span>
+            <span className="eyebrow text-brown/50 text-[0.625rem]">Complete Ritual</span>
           </div>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3">

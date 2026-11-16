@@ -334,12 +334,18 @@ export function Nav() {
               const menuKey = megaMenuKeys[l.to as MegaMenuKey];
               const hasMega = Boolean(menuKey);
               return (
-                <div key={l.to} onMouseEnter={() => (hasMega ? openMega(menuKey) : setActiveMega(null))}>
+                <div
+                  key={l.to}
+                  onMouseEnter={() => (hasMega ? openMega(menuKey) : setActiveMega(null))}
+                >
                   <Link
                     to={l.to}
                     onFocus={() => (hasMega ? openMega(menuKey) : setActiveMega(null))}
                     className="eyebrow relative py-2 text-ivory/80 hover:text-gold transition-colors after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
-                    activeProps={{ className: "eyebrow relative py-2 text-gold after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-full after:bg-gold" }}
+                    activeProps={{
+                      className:
+                        "eyebrow relative py-2 text-gold after:absolute after:left-0 after:-bottom-0.5 after:h-px after:w-full after:bg-gold",
+                    }}
                   >
                     {l.label}
                   </Link>
@@ -392,7 +398,9 @@ export function Nav() {
                     <div className="col-span-3 grid grid-cols-3 gap-10 xl:gap-12">
                       {activeMegaData.sections.map((section) => (
                         <div key={section.title} className="min-w-0">
-                          <p className="eyebrow text-brown/55 mb-5 text-[0.625rem]">{section.title}</p>
+                          <p className="eyebrow text-brown/55 mb-5 text-[0.625rem]">
+                            {section.title}
+                          </p>
                           <ul className="space-y-3.5">
                             {section.links.map((item) => (
                               <li key={item.label}>
@@ -419,7 +427,10 @@ export function Nav() {
                           className="absolute inset-0 h-full w-full object-cover"
                         />
                       </div>
-                      <h3 className="text-brown text-[1.4rem] leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+                      <h3
+                        className="text-brown text-[1.4rem] leading-tight"
+                        style={{ fontFamily: "var(--font-display)" }}
+                      >
                         {activeMegaData.feature.title}
                       </h3>
                       <p className="mt-3 text-brown/70 leading-relaxed text-sm xl:text-[0.95rem] max-w-sm">

@@ -9,9 +9,16 @@ export const Route = createFileRoute("/ritual")({
   head: () => ({
     meta: [
       { title: "The Ritual — The Scented Space" },
-      { name: "description", content: "Why fragrance fades, and the four-step ritual that holds it on the skin for hours longer." },
+      {
+        name: "description",
+        content:
+          "Why fragrance fades, and the four-step ritual that holds it on the skin for hours longer.",
+      },
       { property: "og:title", content: "The Ritual — The Scented Space" },
-      { property: "og:description", content: "Cleanse, hydrate, seal, scent — fragrance that lingers, by design." },
+      {
+        property: "og:description",
+        content: "Cleanse, hydrate, seal, scent — fragrance that lingers, by design.",
+      },
       { property: "og:image", content: ritualImg },
     ],
   }),
@@ -114,7 +121,11 @@ function RitualPage() {
     <>
       <PageHeader
         eyebrow="The Ritual"
-        title={<>The art of <span className="serif-italic text-gold">scented skin.</span></>}
+        title={
+          <>
+            The art of <span className="serif-italic text-gold">scented skin.</span>
+          </>
+        }
         intro="Fragrance is not a finishing touch. It is built — slowly, layer by layer. This is how scent is meant to live on the skin."
         backgroundImage={ritualImg}
         backgroundPositionClassName="bg-center md:bg-[center_20%]"
@@ -125,16 +136,18 @@ function RitualPage() {
 
       <section className="bg-ivory">
         <div className="mx-auto max-w-7xl px-5 md:px-10 py-20 md:py-28 space-y-28 md:space-y-36">
-
           <Chapter
             eyebrow="Chapter I"
-            title={<>Why fragrance <span className="serif-italic">fades.</span></>}
+            title={
+              <>
+                Why fragrance <span className="serif-italic">fades.</span>
+              </>
+            }
             img={ritualImg}
           >
             <p>
-              On unprepared skin, even the most beautiful composition disappears
-              within hours. Dry skin cannot hold scent — the molecules lift, drift,
-              and vanish into the air.
+              On unprepared skin, even the most beautiful composition disappears within hours. Dry
+              skin cannot hold scent — the molecules lift, drift, and vanish into the air.
             </p>
             <p className="serif-italic text-brown/65">
               Most fragrances vanish within 2–3 hours on bare skin.
@@ -143,15 +156,18 @@ function RitualPage() {
 
           <Chapter
             eyebrow="Chapter II"
-            title={<>Why preparation <span className="serif-italic">matters.</span></>}
+            title={
+              <>
+                Why preparation <span className="serif-italic">matters.</span>
+              </>
+            }
             img={nahlaImg}
             flip
           >
             <p>
-              Hydrated, oiled skin gives fragrance somewhere to live. Oils slow
-              evaporation. Butters add a soft, scented cushion. The ritual is not
-              decoration — it is what makes the scent last from morning until
-              evening.
+              Hydrated, oiled skin gives fragrance somewhere to live. Oils slow evaporation. Butters
+              add a soft, scented cushion. The ritual is not decoration — it is what makes the scent
+              last from morning until evening.
             </p>
           </Chapter>
 
@@ -212,8 +228,8 @@ function RitualPage() {
               How <span className="serif-italic">layering</span> works.
             </h2>
             <p className="text-brown/70 max-w-2xl mt-4 leading-relaxed">
-              Each step adds something the next cannot. Together, they hold a
-              fragrance close to the skin from morning until evening.
+              Each step adds something the next cannot. Together, they hold a fragrance close to the
+              skin from morning until evening.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-10 mt-14">
@@ -230,11 +246,16 @@ function RitualPage() {
                     <span className="text-gold text-sm tracking-[0.3em]">{s.n}</span>
                     <span className="eyebrow text-brown/50">Step</span>
                   </div>
-                  <h3 className="text-brown text-2xl mb-2" style={{ fontFamily: "var(--font-display)" }}>
+                  <h3
+                    className="text-brown text-2xl mb-2"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
                     {s.title}
                   </h3>
                   <p className="text-brown/75 text-sm leading-relaxed">{s.body}</p>
-                  <p className="text-brown/55 text-sm leading-relaxed mt-2 serif-italic">{s.detail}</p>
+                  <p className="text-brown/55 text-sm leading-relaxed mt-2 serif-italic">
+                    {s.detail}
+                  </p>
                   <span className="mt-5 inline-block eyebrow text-[0.625rem] text-gold border-t border-gold/40 pt-2">
                     Adds · {s.adds}
                   </span>
@@ -276,7 +297,6 @@ function RitualPage() {
               ))}
             </div>
           </motion.div>
-
         </div>
       </section>
 
@@ -291,7 +311,8 @@ function RitualPage() {
             The full ritual, <span className="serif-italic text-gold">composed for you.</span>
           </h2>
           <p className="mt-6 text-ivory/75 leading-relaxed md:text-lg">
-            All four pieces, in your chosen scent. The slowest, most beautiful way to wear fragrance.
+            All four pieces, in your chosen scent. The slowest, most beautiful way to wear
+            fragrance.
           </p>
           <Link
             to="/shop"

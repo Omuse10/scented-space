@@ -55,7 +55,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const subtotal = items.reduce((n, i) => n + i.qty * i.price, 0);
 
     const lines = items
-      .map((i) => `• ${i.name}${i.variant ? ` — ${i.variant}` : ""} × ${i.qty}  (KSh ${(i.price * i.qty).toLocaleString()})`)
+      .map(
+        (i) =>
+          `• ${i.name}${i.variant ? ` — ${i.variant}` : ""} × ${i.qty}  (KSh ${(i.price * i.qty).toLocaleString()})`,
+      )
       .join("\n");
     const message =
       items.length === 0

@@ -21,11 +21,11 @@ type Props = {
   backgroundPositionClassName?: string;
 };
 
-export function PageHeader({ 
-  eyebrow, 
-  title, 
-  intro, 
-  align = "left", 
+export function PageHeader({
+  eyebrow,
+  title,
+  intro,
+  align = "left",
   backgroundImage,
   backgroundImages,
   backgroundVideo,
@@ -106,11 +106,15 @@ export function PageHeader({
 
   const center = align === "center";
   const heightClass = heroHeightClassName ?? (isExpanded ? "min-h-[100svh]" : "");
-  const paddingClass = isExpanded ? "pt-28 md:pt-40 pb-12 md:pb-0 flex flex-col justify-end md:justify-center" : "pt-32 md:pt-40 pb-20 md:pb-28";
-  
-  const overlayClass = overlayClassName ?? (backgroundVideo
-    ? "absolute inset-0 bg-black/10"
-    : "absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/50 to-brown/30 md:bg-gradient-to-r md:from-brown/80 md:via-brown/40 md:to-brown/20");
+  const paddingClass = isExpanded
+    ? "pt-28 md:pt-40 pb-12 md:pb-0 flex flex-col justify-end md:justify-center"
+    : "pt-32 md:pt-40 pb-20 md:pb-28";
+
+  const overlayClass =
+    overlayClassName ??
+    (backgroundVideo
+      ? "absolute inset-0 bg-black/10"
+      : "absolute inset-0 bg-gradient-to-t from-brown/85 via-brown/50 to-brown/30 md:bg-gradient-to-r md:from-brown/80 md:via-brown/40 md:to-brown/20");
 
   return (
     <section
@@ -155,7 +159,7 @@ export function PageHeader({
           </>
         )}
       </div>
-      
+
       {/* Gradient Overlay */}
       <div className={overlayClass} />
 
@@ -173,9 +177,14 @@ export function PageHeader({
             <span className="eyebrow text-ivory/90">{eyebrow}</span>
             {center && <span className="hairline" />}
           </div>
-          <h1 id={headingId} className={`display-xl text-ivory ${titleClassName ?? ""}`}>{title}</h1>
+          <h1 id={headingId} className={`display-xl text-ivory ${titleClassName ?? ""}`}>
+            {title}
+          </h1>
           {intro && (
-            <p id={introId} className={`mt-8 text-ivory/85 leading-relaxed md:text-lg max-w-2xl ${center ? "mx-auto" : ""} ${introClassName ?? ""}`}>
+            <p
+              id={introId}
+              className={`mt-8 text-ivory/85 leading-relaxed md:text-lg max-w-2xl ${center ? "mx-auto" : ""} ${introClassName ?? ""}`}
+            >
               {intro}
             </p>
           )}
@@ -184,4 +193,3 @@ export function PageHeader({
     </section>
   );
 }
-

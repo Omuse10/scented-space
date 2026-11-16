@@ -31,7 +31,7 @@ const doorways = [
     body: "Tell us your day, your skin, your evenings. We will compose a recommendation.",
     cta: "Open WhatsApp",
     href: `${WHATSAPP_HREF_BASE}?text=${encodeURIComponent(
-      "Hello Scented Space — I'd like a fragrance recommendation. Could you guide me?"
+      "Hello Scented Space — I'd like a fragrance recommendation. Could you guide me?",
     )}`,
   },
 ];
@@ -51,8 +51,8 @@ export function Begin() {
             </h2>
           </div>
           <p className="md:col-span-4 md:col-start-9 text-brown/70 leading-relaxed">
-            There is no wrong way to enter the house. Choose the door that fits the
-            mood you are in today.
+            There is no wrong way to enter the house. Choose the door that fits the mood you are in
+            today.
           </p>
         </div>
 
@@ -76,19 +76,37 @@ export function Begin() {
                 <p className="text-brown/70 text-sm leading-relaxed mt-3 flex-1">{d.body}</p>
                 <span className="mt-6 eyebrow text-terracotta inline-flex items-center gap-2 border-b border-terracotta/30 pb-1 self-start group-hover:border-terracotta transition-colors">
                   {d.cta}
-                  <span aria-hidden className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-500 group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
                 </span>
               </motion.div>
             );
-            if ("href" in d && d.href) {
+            if ("href" in d) {
               return (
-                <a key={d.title} href={d.href} target="_blank" rel="noreferrer" className="block h-full">
+                <a
+                  key={d.title}
+                  href={d.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block h-full"
+                >
                   {Inner}
                 </a>
               );
             }
+            if ("params" in d) {
+              return (
+                <Link key={d.title} to={d.to} params={d.params} className="block h-full">
+                  {Inner}
+                </Link>
+              );
+            }
             return (
-              <Link key={d.title} to={d.to} params={(d as any).params} className="block h-full">
+              <Link key={d.title} to={d.to} className="block h-full">
                 {Inner}
               </Link>
             );

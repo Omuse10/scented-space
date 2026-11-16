@@ -22,7 +22,10 @@ export const Route = createFileRoute("/shop/$productId")({
     meta: [
       { title: loaderData ? `${loaderData.product.name} — The Scented Space` : "Product" },
       { name: "description", content: loaderData?.product.feeling ?? "" },
-      { property: "og:title", content: loaderData ? `${loaderData.product.name} — The Scented Space` : "" },
+      {
+        property: "og:title",
+        content: loaderData ? `${loaderData.product.name} — The Scented Space` : "",
+      },
       { property: "og:description", content: loaderData?.product.feeling ?? "" },
       { property: "og:image", content: loaderData?.product.image ?? "" },
       { name: "twitter:image", content: loaderData?.product.image ?? "" },
@@ -63,11 +66,7 @@ function ProductPage() {
   );
 
   // "You may also like" — same mood
-  const related = (
-    product.mood === "discovery"
-      ? perfumeOils
-      : oilsByMood(product.mood)
-  )
+  const related = (product.mood === "discovery" ? perfumeOils : oilsByMood(product.mood))
     .filter((p) => p.id !== product.id)
     .slice(0, 3);
 
@@ -78,9 +77,13 @@ function ProductPage() {
       <section className="bg-ivory">
         <div className="mx-auto max-w-7xl px-5 md:px-10 py-10 md:py-16">
           <nav className="eyebrow text-brown/55 mb-8 flex items-center gap-2 flex-wrap">
-            <Link to="/" className="hover:text-terracotta">Home</Link>
+            <Link to="/" className="hover:text-terracotta">
+              Home
+            </Link>
             <span>/</span>
-            <Link to="/shop" className="hover:text-terracotta">Shop</Link>
+            <Link to="/shop" className="hover:text-terracotta">
+              Shop
+            </Link>
             <span>/</span>
             <span className="text-brown">{product.name}</span>
           </nav>
@@ -91,6 +94,7 @@ function ProductPage() {
             {product.inspiredBy && (
               <p className="mt-2 text-brown/55 serif-italic">
                 Inspired by {product.inspiredBy}
+                {product.inspiredByBrand && ` — ${product.inspiredByBrand}`}
               </p>
             )}
           </header>
@@ -134,10 +138,7 @@ function ProductPage() {
               className="md:col-span-5"
             >
               <div className="flex items-baseline gap-3">
-                <span
-                  className="text-brown text-2xl"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
+                <span className="text-brown text-2xl" style={{ fontFamily: "var(--font-display)" }}>
                   KSh {price.toLocaleString()}
                 </span>
                 <span className="eyebrow text-brown/50 text-[0.625rem]">
@@ -216,12 +217,8 @@ function ProductPage() {
               </div>
 
               <div className="mt-10">
-                <p className="text-brown text-lg serif-italic">
-                  {product.noteSummary}
-                </p>
-                <p className="mt-4 text-brown/80 leading-relaxed">
-                  {product.feeling}
-                </p>
+                <p className="text-brown text-lg serif-italic">{product.noteSummary}</p>
+                <p className="mt-4 text-brown/80 leading-relaxed">{product.feeling}</p>
               </div>
 
               {product.availableIn.length > 0 && (
@@ -260,10 +257,7 @@ function ProductPage() {
                   <span className="eyebrow">The Ritual</span>
                 </div>
                 <h2 className="display-lg text-brown">
-                  Complete Your{" "}
-                  <span className="serif-italic">
-                    {product.name.split(" ")[0]}
-                  </span>{" "}
+                  Complete Your <span className="serif-italic">{product.name.split(" ")[0]}</span>{" "}
                   Ritual
                 </h2>
               </div>
@@ -287,15 +281,10 @@ function ProductPage() {
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
                     />
                   </div>
-                  <h3
-                    className="text-brown text-lg"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
+                  <h3 className="text-brown text-lg" style={{ fontFamily: "var(--font-display)" }}>
                     {r.name}
                   </h3>
-                  <p className="text-brown/60 text-sm mt-1.5 serif-italic">
-                    {r.character}
-                  </p>
+                  <p className="text-brown/60 text-sm mt-1.5 serif-italic">{r.character}</p>
                   <p className="text-brown/75 text-sm mt-2 tracking-wider">
                     KSh {r.price.toLocaleString()}
                   </p>
@@ -329,15 +318,10 @@ function ProductPage() {
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-105"
                     />
                   </div>
-                  <h3
-                    className="text-brown text-xl"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
+                  <h3 className="text-brown text-xl" style={{ fontFamily: "var(--font-display)" }}>
                     {r.name}
                   </h3>
-                  <p className="text-brown/60 text-sm mt-1 serif-italic">
-                    {r.noteSummary}
-                  </p>
+                  <p className="text-brown/60 text-sm mt-1 serif-italic">{r.noteSummary}</p>
                 </Link>
               ))}
             </div>

@@ -9,12 +9,5 @@ export function Logo({
   className = "h-full w-auto",
   alt = "The Scented Space — Luxury Craft Studio",
 }: Props) {
-  return (
-    <img
-      src={logoMark}
-      alt={alt}
-      className={className}
-      draggable={false}
-    />
-  );
+  return <img src={logoMark} alt={alt} className={className} draggable={false} />;
 }

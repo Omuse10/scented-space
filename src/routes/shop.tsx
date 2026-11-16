@@ -1,14 +1,15 @@
-
 import { createFileRoute, Link } from "@tanstack/react-router";
 import shopTheHouseBg from "@/assets/shop-the-house-bg.jpg.asset.json";
 import shopHeroVideo from "@/assets/Odys.mp4";
 import { motion } from "framer-motion";
 import { ShoppingBag, ArrowUpRight } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
+import { CatalogOnlyFragranceCard } from "@/components/site/CatalogOnlyFragranceCard";
 import { useCart } from "@/lib/cart";
 import {
   moods,
   perfumeOils,
+  fragranceCatalogue,
   rituals,
   discoverySetProducts,
   FORMAT_LABEL,
@@ -28,8 +29,7 @@ export const Route = createFileRoute("/shop")({
       { property: "og:title", content: "Shop — The Scented Space" },
       {
         property: "og:description",
-        content:
-          "Browse by mood, discovery set, ritual or perfume oil — one cohesive shop.",
+        content: "Browse by mood, discovery set, ritual or perfume oil — one cohesive shop.",
       },
     ],
   }),
@@ -119,18 +119,21 @@ function ShopPage() {
       <Section
         eyebrow="The Full Collection"
         title="All Perfume Oils"
-        intro="Twenty signatures, composed in small batches."
+        intro={`The complete catalogue of ${fragranceCatalogue.length} fragrances.`}
         tone="ivory"
         cta={{ to: "/perfume-oils", label: "Explore all perfume oils →" }}
         id="oils"
       >
         <CardGrid>
-          {perfumeOils.slice(0, 12).map((p, i) => (
-            <ShopCard key={p.id} product={p} index={i} />
-          ))}
+          {fragranceCatalogue.map((entry, i) =>
+            "catalogOnly" in entry ? (
+              <CatalogOnlyFragranceCard key={entry.id} fragrance={entry} index={i} />
+            ) : (
+              <ShopCard key={entry.id} product={entry} index={i} />
+            ),
+          )}
         </CardGrid>
       </Section>
-
     </>
   );
 }
@@ -163,9 +166,7 @@ function Section({
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="h-px w-8 bg-gold/60" />
-              <span className="eyebrow text-[0.7rem] text-gold tracking-[0.3em]">
-                {eyebrow}
-              </span>
+              <span className="eyebrow text-[0.7rem] text-gold tracking-[0.3em]">{eyebrow}</span>
             </div>
             <h2
               className="text-brown text-[2rem] md:text-[2.75rem] leading-[1.05] tracking-[-0.02em]"
@@ -173,11 +174,7 @@ function Section({
             >
               {title}
             </h2>
-            {intro && (
-              <p className="mt-3 text-brown/65 leading-relaxed max-w-xl">
-                {intro}
-              </p>
-            )}
+            {intro && <p className="mt-3 text-brown/65 leading-relaxed max-w-xl">{intro}</p>}
           </div>
           {cta && (
             <Link
@@ -207,13 +204,7 @@ function CardGrid({ children }: { children: React.ReactNode }) {
 /* photo → title → price/badge → primary CTA → details                 */
 /* ------------------------------------------------------------------ */
 
-function CardShell({
-  index,
-  children,
-}: {
-  index: number;
-  children: React.ReactNode;
-}) {
+function CardShell({ index, children }: { index: number; children: React.ReactNode }) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -254,9 +245,7 @@ function CardImage({
       {eyebrow && (
         <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 text-ivory">
           <span className="h-px w-6 bg-gold" />
-          <span className="eyebrow text-[0.6rem] text-gold tracking-[0.3em]">
-            {eyebrow}
-          </span>
+          <span className="eyebrow text-[0.6rem] text-gold tracking-[0.3em]">{eyebrow}</span>
         </div>
       )}
     </div>
@@ -279,26 +268,14 @@ function CardTitle({ children }: { children: React.ReactNode }) {
 }
 
 function CardPrice({ value }: { value: string }) {
-  return (
-    <p className="text-brown/85 text-sm tracking-wider tabular-nums">{value}</p>
-  );
+  return <p className="text-brown/85 text-sm tracking-wider tabular-nums">{value}</p>;
 }
 
-function CardDetails({
-  label,
-  value,
-}: {
-  label: string;
-  value: React.ReactNode;
-}) {
+function CardDetails({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="border-t border-brown/10 pt-3">
-      <p className="eyebrow text-[0.6rem] text-gold tracking-[0.28em] mb-1.5">
-        {label}
-      </p>
-      <p className="text-brown/75 text-[0.8rem] sm:text-sm leading-relaxed">
-        {value}
-      </p>
+      <p className="eyebrow text-[0.6rem] text-gold tracking-[0.28em] mb-1.5">{label}</p>
+      <p className="text-brown/75 text-[0.8rem] sm:text-sm leading-relaxed">{value}</p>
     </div>
   );
 }
@@ -319,11 +296,7 @@ function ShopCard({ product, index }: { product: Product; index: number }) {
 
   return (
     <CardShell index={index}>
-      <Link
-        to="/shop/$productId"
-        params={{ productId: product.id }}
-        className="contents"
-      >
+      <Link to="/shop/$productId" params={{ productId: product.id }} className="contents">
         <CardImage src={product.image} alt={product.name} badge={product.badge} />
         <CardBody>
           <CardTitle>{product.name}</CardTitle>
@@ -341,6 +314,17 @@ function ShopCard({ product, index }: { product: Product; index: number }) {
 
           <CardDetails label="Notes" value={product.noteSummary} />
 
+          {product.inspiredBy && (
+            <CardDetails
+              label="Inspired by"
+              value={
+                product.inspiredByBrand
+                  ? `${product.inspiredBy} — ${product.inspiredByBrand}`
+                  : product.inspiredBy
+              }
+            />
+          )}
+
           {product.feeling && (
             <p className="text-brown/70 text-[0.8rem] sm:text-sm leading-relaxed line-clamp-3">
               {product.feeling}
@@ -350,9 +334,7 @@ function ShopCard({ product, index }: { product: Product; index: number }) {
           {product.availableIn.length > 0 && (
             <CardDetails
               label="Available In"
-              value={product.availableIn
-                .map((f) => FORMAT_LABEL[f])
-                .join(" · ")}
+              value={product.availableIn.map((f) => FORMAT_LABEL[f]).join(" · ")}
             />
           )}
         </CardBody>
@@ -362,21 +344,11 @@ function ShopCard({ product, index }: { product: Product; index: number }) {
 }
 
 /* -- Mood variant -- */
-function MoodCard({
-  mood,
-  index,
-}: {
-  mood: (typeof moods)[number];
-  index: number;
-}) {
+function MoodCard({ mood, index }: { mood: (typeof moods)[number]; index: number }) {
   return (
     <CardShell index={index}>
       <Link to="/perfume-oils" hash={mood.key as Mood} className="contents">
-        <CardImage
-          src={mood.image}
-          alt={mood.title}
-          eyebrow={mood.eyebrow}
-        />
+        <CardImage src={mood.image} alt={mood.title} eyebrow={mood.eyebrow} />
         <CardBody>
           <CardTitle>{mood.title}</CardTitle>
           <p className="serif-italic text-brown/70 text-sm">{mood.emotion}</p>
@@ -389,19 +361,13 @@ function MoodCard({
             <ArrowUpRight className="w-3.5 h-3.5" />
           </button>
 
-          <CardDetails
-            label="Notes"
-            value={mood.keywords.join(" · ")}
-          />
+          <CardDetails label="Notes" value={mood.keywords.join(" · ")} />
 
           <p className="text-brown/70 text-[0.8rem] sm:text-sm leading-relaxed line-clamp-3">
             {mood.body}
           </p>
 
-          <CardDetails
-            label="Available In"
-            value={mood.scents.slice(0, 4).join(" · ")}
-          />
+          <CardDetails label="Available In" value={mood.scents.slice(0, 4).join(" · ")} />
         </CardBody>
       </Link>
     </CardShell>

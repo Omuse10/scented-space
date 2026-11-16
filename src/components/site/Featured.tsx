@@ -41,7 +41,11 @@ function ProductCard({ p, large }: { p: Product; large?: boolean }) {
             className={`text-brown ${large ? "text-3xl md:text-4xl" : "text-2xl"}`}
             style={{ fontFamily: "var(--font-display)" }}
           >
-            <Link to="/shop/$productId" params={{ productId: p.id }} className="hover:text-terracotta transition-colors">
+            <Link
+              to="/shop/$productId"
+              params={{ productId: p.id }}
+              className="hover:text-terracotta transition-colors"
+            >
               {p.name}
             </Link>
           </h3>
@@ -78,7 +82,15 @@ function ProductCard({ p, large }: { p: Product; large?: boolean }) {
 }
 
 export function Featured() {
-  const featured = products.filter((p) => ["discovery-set", "nahla-ritual", "velvet-elegance-ritual", "alina-ritual", "gentleman-collection"].includes(p.id));
+  const featured = products.filter((p) =>
+    [
+      "discovery-set",
+      "nahla-ritual",
+      "velvet-elegance-ritual",
+      "alina-ritual",
+      "gentleman-collection",
+    ].includes(p.id),
+  );
   const [first, ...rest] = featured;
   return (
     <section id="featured" className="bg-ivory">
@@ -94,8 +106,8 @@ export function Featured() {
             </h2>
           </div>
           <p className="md:col-span-4 md:col-start-9 text-brown/70 leading-relaxed">
-            Five quiet doorways into the house. The Discovery Set is the most
-            beloved place to start.
+            Five quiet doorways into the house. The Discovery Set is the most beloved place to
+            start.
           </p>
         </div>
 

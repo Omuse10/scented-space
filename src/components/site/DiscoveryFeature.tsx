@@ -37,8 +37,8 @@ export function DiscoveryFeature() {
             <span className="serif-italic text-gold">Discover five signature scents.</span>
           </h2>
           <p className="mt-6 text-ivory/75 leading-relaxed md:text-lg max-w-lg">
-            Five 3ml fragrance oils, presented in a linen-lined keepsake — the
-            quietest, most considered way to meet the house.
+            Five 3ml fragrance oils, presented in a linen-lined keepsake — the quietest, most
+            considered way to meet the house.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Link

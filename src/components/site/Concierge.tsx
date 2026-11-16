@@ -21,8 +21,8 @@ export function Concierge() {
             Not sure where to <span className="serif-italic">begin?</span>
           </h2>
           <p className="mt-6 text-brown/75 leading-relaxed max-w-xl mx-auto md:text-lg">
-            Tell us a little about the woman you are scenting — the mood, the
-            moment, the season. We will compose a quiet recommendation, just for you.
+            Tell us a little about the woman you are scenting — the mood, the moment, the season. We
+            will compose a quiet recommendation, just for you.
           </p>
           <a
             href={whatsappHref}

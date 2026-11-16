@@ -4,7 +4,11 @@ import heroImg from "@/assets/arm-perfume.jpg";
 
 export function Hero() {
   return (
-    <section id="top" data-tour="hero-section" className="relative min-h-[100svh] w-full overflow-hidden bg-brown">
+    <section
+      id="top"
+      data-tour="hero-section"
+      className="relative min-h-[100svh] w-full overflow-hidden bg-brown"
+    >
       <motion.img
         src={heroImg}
         alt="A woman in warm natural light, anointing her skin with fragrance oil"
@@ -26,7 +30,9 @@ export function Hero() {
         >
           <div className="flex items-center gap-3 text-ivory/80 mb-5 md:mb-8">
             <span className="hairline" />
-            <span className="eyebrow text-ivory/80 text-[0.625rem] md:text-xs">Est. 2023 — Nairobi</span>
+            <span className="eyebrow text-ivory/80 text-[0.625rem] md:text-xs">
+              Est. 2023 — Nairobi
+            </span>
           </div>
           <h1 className="display-xl text-ivory text-[3.25rem] leading-[0.95] md:text-inherit md:leading-inherit md:max-w-[11ch]">
             Beautifully

@@ -16,8 +16,7 @@ export const Route = createFileRoute("/body")({
       { property: "og:title", content: "Body Collection — The Scented Space" },
       {
         property: "og:description",
-        content:
-          "Shower gels, lotions, butters and body oils — composed in our signature scents.",
+        content: "Shower gels, lotions, butters and body oils — composed in our signature scents.",
       },
     ],
   }),

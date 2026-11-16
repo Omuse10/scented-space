@@ -19,8 +19,8 @@ export function Mood() {
             </h2>
           </div>
           <p className="md:col-span-4 md:col-start-9 text-brown/75 leading-relaxed md:text-lg">
-            Notes can be studied. A mood, you simply recognise. Choose where
-            you are today — the right fragrance follows.
+            Notes can be studied. A mood, you simply recognise. Choose where you are today — the
+            right fragrance follows.
           </p>
         </div>
 
@@ -74,16 +74,15 @@ export function Mood() {
               <div className="md:col-span-4">
                 <p
                   className="serif-italic text-brown leading-snug"
-                  style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.5rem, 2.4vw, 2rem)" }}
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(1.5rem, 2.4vw, 2rem)",
+                  }}
                 >
                   {hero.emotion}
                 </p>
-                <p className="mt-6 text-brown/75 leading-relaxed">
-                  {hero.forWhom}
-                </p>
-                <p className="mt-6 text-xs text-brown/55 serif-italic">
-                  {hero.scents.join(" · ")}
-                </p>
+                <p className="mt-6 text-brown/75 leading-relaxed">{hero.forWhom}</p>
+                <p className="mt-6 text-xs text-brown/55 serif-italic">{hero.scents.join(" · ")}</p>
                 <span className="mt-8 inline-block eyebrow text-terracotta border-b border-terracotta/40 pb-1 group-hover:border-terracotta transition-colors">
                   Explore {hero.title} →
                 </span>
@@ -102,11 +101,7 @@ export function Mood() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.8, delay: (i % 4) * 0.06, ease: "easeOut" }}
             >
-              <Link
-                to="/perfume-oils"
-                hash={m.key}
-                className="group block"
-              >
+              <Link to="/perfume-oils" hash={m.key} className="group block">
                 <div className="relative overflow-hidden aspect-[3/4] mb-7 bg-brown/10 editorial-frame corner-ticks image-vignette">
                   <img
                     src={m.image}
@@ -116,9 +111,7 @@ export function Mood() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brown/65 via-brown/10 to-transparent z-[2]" />
                   <div className="absolute bottom-4 left-4 right-4 z-[3]">
-                    <span className="eyebrow text-gold text-[0.625rem]">
-                      {m.eyebrow}
-                    </span>
+                    <span className="eyebrow text-gold text-[0.625rem]">{m.eyebrow}</span>
                     <h3
                       className="text-ivory mt-2"
                       style={{
@@ -132,18 +125,13 @@ export function Mood() {
                   </div>
                 </div>
 
-                <p className="serif-italic text-brown/85 leading-snug">
-                  {m.emotion}
-                </p>
+                <p className="serif-italic text-brown/85 leading-snug">{m.emotion}</p>
                 <p className="mt-3 text-sm text-brown/60 leading-relaxed line-clamp-2">
                   {m.forWhom}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-x-2.5 gap-y-1">
                   {m.keywords.map((k) => (
-                    <span
-                      key={k}
-                      className="eyebrow text-[0.625rem] text-brown/55"
-                    >
+                    <span key={k} className="eyebrow text-[0.625rem] text-brown/55">
                       · {k}
                     </span>
                   ))}

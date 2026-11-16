@@ -63,16 +63,17 @@ export function CartDrawer() {
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between gap-3">
-                          <h4 className="text-brown" style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}>
+                          <h4
+                            className="text-brown"
+                            style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}
+                          >
                             {i.name}
                           </h4>
                           <span className="text-brown text-sm whitespace-nowrap">
                             KSh {(i.price * i.qty).toLocaleString()}
                           </span>
                         </div>
-                        {i.variant && (
-                          <p className="text-brown/60 text-xs mt-0.5">{i.variant}</p>
-                        )}
+                        {i.variant && <p className="text-brown/60 text-xs mt-0.5">{i.variant}</p>}
                         <div className="mt-3 flex items-center justify-between">
                           <div className="inline-flex items-center border border-border">
                             <button

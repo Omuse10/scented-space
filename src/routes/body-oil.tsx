@@ -7,12 +7,7 @@ const options = [
   {
     title: "Dry Body Oil",
     intro: "Lightweight. Silky. Fast absorbing.",
-    bestFor: [
-      "Daytime use",
-      "Non-greasy finish",
-      "Layering with perfume oil",
-      "Soft glow",
-    ],
+    bestFor: ["Daytime use", "Non-greasy finish", "Layering with perfume oil", "Soft glow"],
     cta: "Shop Dry Body Oil",
     to: "/dry-body-oil" as const,
     image: dryOilImg,
@@ -20,12 +15,7 @@ const options = [
   {
     title: "Nourishing Body Oil",
     intro: "Richer. More conditioning. More indulgent.",
-    bestFor: [
-      "Dry skin",
-      "After-shower use",
-      "Night-time ritual",
-      "Deep nourishment",
-    ],
+    bestFor: ["Dry skin", "After-shower use", "Night-time ritual", "Deep nourishment"],
     cta: "Shop Nourishing Body Oil",
     to: "/nourishing-body-oil" as const,
     image: nourishingOilImg,
@@ -44,8 +34,7 @@ export const Route = createFileRoute("/body-oil")({
       { property: "og:title", content: "Choose Your Oil — The Scented Space" },
       {
         property: "og:description",
-        content:
-          "Find the right body oil — lightweight and silky, or rich and deeply nourishing.",
+        content: "Find the right body oil — lightweight and silky, or rich and deeply nourishing.",
       },
     ],
   }),
@@ -63,8 +52,7 @@ function BodyOilPage() {
             <span className="hairline" />
           </div>
           <h1 className="display-xl text-brown">
-            Choose Your{" "}
-            <span className="serif-italic text-gold">Oil</span>
+            Choose Your <span className="serif-italic text-gold">Oil</span>
           </h1>
         </div>
 

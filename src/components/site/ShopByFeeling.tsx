@@ -55,7 +55,12 @@ export function ShopByFeeling() {
               }
             >
               <article className="group relative overflow-hidden rounded-2xl ring-1 ring-gold/20 shadow-[0_6px_24px_-16px_rgba(60,30,15,0.35)] transition-all duration-700 hover:ring-gold/40 hover:shadow-[0_12px_36px_-16px_rgba(60,30,15,0.5)] bg-cocoa">
-                <div className={"relative overflow-hidden " + (i === 4 ? "aspect-[4/5] lg:aspect-[16/10]" : "aspect-[4/5]")}>
+                <div
+                  className={
+                    "relative overflow-hidden " +
+                    (i === 4 ? "aspect-[4/5] lg:aspect-[16/10]" : "aspect-[4/5]")
+                  }
+                >
                   <img
                     src={m.image}
                     alt={m.title}
@@ -83,9 +88,7 @@ export function ShopByFeeling() {
                     >
                       {m.title}
                     </h3>
-                    <p className="serif-italic text-gold text-sm md:text-[0.95rem]">
-                      {m.emotion}
-                    </p>
+                    <p className="serif-italic text-gold text-sm md:text-[0.95rem]">{m.emotion}</p>
 
                     {/* Featured fragrances */}
                     <ul className="flex flex-wrap gap-x-2.5 gap-y-1.5">
@@ -107,7 +110,11 @@ export function ShopByFeeling() {
                     >
                       Explore Collection
                       <svg width="16" height="8" viewBox="0 0 22 10" fill="none">
-                        <path d="M0 5h20m0 0L16 1m4 4l-4 4" stroke="currentColor" strokeWidth="1.25" />
+                        <path
+                          d="M0 5h20m0 0L16 1m4 4l-4 4"
+                          stroke="currentColor"
+                          strokeWidth="1.25"
+                        />
                       </svg>
                     </Link>
                   </div>

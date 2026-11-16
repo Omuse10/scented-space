@@ -45,15 +45,13 @@ export function Founder() {
               className="serif-italic text-brown/90"
               style={{ fontFamily: "var(--font-display)", fontSize: "1.35rem", lineHeight: 1.5 }}
             >
-              I started The Scented Space because I wanted to bring more
-              beauty, presence and intention into the everyday — and scent
-              was the most honest place to begin.
+              I started The Scented Space because I wanted to bring more beauty, presence and
+              intention into the everyday — and scent was the most honest place to begin.
             </p>
             <p>
-              What you find here is not a fragrance line. It is a ritual
-              house — composed slowly, in small batches, for the woman who
-              already knows what quality feels like and is simply choosing
-              what earns a place in her life.
+              What you find here is not a fragrance line. It is a ritual house — composed slowly, in
+              small batches, for the woman who already knows what quality feels like and is simply
+              choosing what earns a place in her life.
             </p>
           </div>
           <div className="mt-12 flex items-center gap-4">

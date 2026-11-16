@@ -6,13 +6,7 @@ import radiantImg from "@/assets/mood-radiant.jpg";
 import boldImg from "@/assets/mood-bold.jpg";
 import refinedImg from "@/assets/mood-refined.jpg";
 
-export type Mood =
-  | "warm"
-  | "radiant"
-  | "bold"
-  | "refined"
-  | "distinguished"
-  | "discovery";
+export type Mood = "warm" | "radiant" | "bold" | "refined" | "distinguished" | "discovery";
 
 export type Intensity = "Soft" | "Medium" | "Bold";
 
@@ -37,6 +31,7 @@ export type Product = {
   id: string;
   name: string;
   inspiredBy?: string;
+  inspiredByBrand?: string;
   tagline: string;
   price: number;
   image: string;
@@ -93,7 +88,7 @@ export const moods: {
     forWhom: "For those who appreciate understated sophistication.",
     keywords: ["Fresh", "Graceful", "Luminous"],
     image: radiantImg,
-    scents: ["Whispering Petals", "Théa", "Riviera Dreams", "Lyra"],
+    scents: ["Whispering Petals", "Théa", "Riviera Dream", "Lyra"],
   },
   {
     key: "bold",
@@ -104,13 +99,7 @@ export const moods: {
     forWhom: "For those who enjoy leaving an impression.",
     keywords: ["Confident", "Expressive", "Unforgettable"],
     image: boldImg,
-    scents: [
-      "Velvet Elegance",
-      "Sensual Whispers",
-      "Carmine Temptations",
-      "Aurielle",
-      "Amara",
-    ],
+    scents: ["Velvet Elegance", "Sensual Whispers", "Carmine Temptations"],
   },
   {
     key: "refined",
@@ -142,6 +131,7 @@ type OilSeed = {
   id: string;
   name: string;
   inspiredBy?: string;
+  inspiredByBrand?: string;
   mood: Mood;
   noteSummary: string;
   emotion: string;
@@ -161,7 +151,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "nahla",
     name: "Nahla",
-    inspiredBy: "Kayali Vanilla 28",
+    inspiredBy: "Bianco Latte",
+    inspiredByBrand: "Giardini di Toscana",
     mood: "warm",
     noteSummary: "Creamy • Vanilla • Caramel",
     emotion: "The scent of being cared for.",
@@ -190,7 +181,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "alina",
     name: "Alina",
-    inspiredBy: "Delina by PdM",
+    inspiredBy: "Queening",
+    inspiredByBrand: "Mind Games",
     mood: "warm",
     noteSummary: "Fruity • Sweet • Elegant",
     emotion: "Being well, quietly.",
@@ -218,6 +210,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "samara",
     name: "Samara",
+    inspiredBy: "Vanille Planifolia",
+    inspiredByBrand: "Guerlain",
     mood: "warm",
     noteSummary: "Vanilla • Amber • Warm",
     emotion: "A slow, golden hour.",
@@ -238,6 +232,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "zafira",
     name: "Zafira",
+    inspiredBy: "Tonka Sarrapia",
+    inspiredByBrand: "Guerlain",
     mood: "warm",
     noteSummary: "Tonka • Cocoa • Woods",
     emotion: "Comfort with backbone.",
@@ -259,7 +255,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "whispering-petals",
     name: "Whispering Petals",
-    inspiredBy: "Mon Paris Couture",
+    inspiredBy: "Delina",
+    inspiredByBrand: "Parfums de Marly",
     mood: "radiant",
     noteSummary: "Rose • Lychee • Musk",
     emotion: "Petals at dawn.",
@@ -276,16 +273,12 @@ const oilSeeds: OilSeed[] = [
     },
     image: radiantImg,
     bestseller: true,
-    availableIn: [
-      "perfume-oil",
-      "shower-gel",
-      "body-lotion",
-      "dry-body-oil",
-    ],
+    availableIn: ["perfume-oil", "shower-gel", "body-lotion", "dry-body-oil"],
   },
   {
     id: "thea",
     name: "Théa",
+    inspiredBy: "Elle Anniversary",
     mood: "radiant",
     noteSummary: "Floral • Citrus • Musk",
     emotion: "Sunlight through linen.",
@@ -305,7 +298,9 @@ const oilSeeds: OilSeed[] = [
   },
   {
     id: "riviera-dreams",
-    name: "Riviera Dreams",
+    name: "Riviera Dream",
+    inspiredBy: "Lust in Paradise",
+    inspiredByBrand: "Ex Nihilo",
     mood: "radiant",
     noteSummary: "Peony • Pink Pepper • Musk",
     emotion: "A long, blue afternoon.",
@@ -326,6 +321,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "lyra",
     name: "Lyra",
+    inspiredBy: "Stellar Dreamers",
+    inspiredByBrand: "Ex Nihilo",
     mood: "radiant",
     noteSummary: "Fruity • Floral • Amber",
     emotion: "Soft, sunlit hours.",
@@ -348,6 +345,7 @@ const oilSeeds: OilSeed[] = [
     id: "velvet-elegance",
     name: "Velvet Elegance",
     inspiredBy: "Hibiscus Mahajad",
+    inspiredByBrand: "Maison Crivelli",
     mood: "bold",
     noteSummary: "Hibiscus • Rose • Vanilla",
     emotion: "Arrive slowly. Stay late.",
@@ -364,16 +362,13 @@ const oilSeeds: OilSeed[] = [
     },
     image: velvetImg,
     bestseller: true,
-    availableIn: [
-      "perfume-oil",
-      "shower-gel",
-      "body-lotion",
-      "dry-body-oil",
-    ],
+    availableIn: ["perfume-oil", "shower-gel", "body-lotion", "dry-body-oil"],
   },
   {
     id: "sensual-whispers",
     name: "Sensual Whispers",
+    inspiredBy: "Guidance 46",
+    inspiredByBrand: "Amouage",
     mood: "bold",
     noteSummary: "Pear • Rose • Sandalwood",
     emotion: "Skin-close, after dark.",
@@ -394,6 +389,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "carmine-temptations",
     name: "Carmine Temptations",
+    inspiredBy: "Carmina",
+    inspiredByBrand: "Creed",
     mood: "bold",
     noteSummary: "Cherry • Rose • Amber",
     emotion: "Evenings you remember.",
@@ -411,51 +408,12 @@ const oilSeeds: OilSeed[] = [
     image: boldImg,
     availableIn: ["perfume-oil", "dry-body-oil"],
   },
-  {
-    id: "aurielle",
-    name: "Aurielle",
-    mood: "bold",
-    noteSummary: "Rose • Vanilla • Amber",
-    emotion: "Gilded and slow.",
-    feeling:
-      "Aurielle is rose petals dipped in warm vanilla, finished with a long, golden amber drydown.",
-    bestFor: "Evenings",
-    intensity: "Bold",
-    personality: "Opulent & Warm",
-    pairsWith: "Body Lotion + Perfume Oil",
-    notes: {
-      top: ["Saffron", "Bergamot"],
-      heart: ["Rose", "Iris"],
-      base: ["Vanilla", "Amber", "Oud"],
-    },
-    image: boldImg,
-    availableIn: ["perfume-oil"],
-  },
-  {
-    id: "amara",
-    name: "Amara",
-    mood: "bold",
-    noteSummary: "Candied Citrus • Vanilla • Orange Blossom",
-    emotion: "Bright, then warm.",
-    feeling:
-      "Amara opens on candied citrus and orange blossom, settling into a creamy vanilla — bright at the top, lingering at the base.",
-    bestFor: "Day into evening",
-    intensity: "Medium",
-    personality: "Radiant & Bold",
-    pairsWith: "Shower Gel + Perfume Oil",
-    notes: {
-      top: ["Candied Orange", "Bergamot"],
-      heart: ["Orange Blossom", "Jasmine"],
-      base: ["Vanilla", "Musk", "Amber"],
-    },
-    image: boldImg,
-    availableIn: ["perfume-oil"],
-  },
   // Refined & Commanding
   {
     id: "cipher",
     name: "Cipher",
-    inspiredBy: "Aventus",
+    inspiredBy: "Absolu Aventus",
+    inspiredByBrand: "Creed",
     mood: "refined",
     noteSummary: "Pineapple • Woods • Amber",
     emotion: "Quiet authority.",
@@ -477,6 +435,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "griselle",
     name: "Griselle",
+    inspiredBy: "Gris Dior Esprit de Parfum",
+    inspiredByBrand: "Dior",
     mood: "refined",
     noteSummary: "Rose • Patchouli • Woods",
     emotion: "Modern, considered.",
@@ -497,11 +457,12 @@ const oilSeeds: OilSeed[] = [
   {
     id: "verin",
     name: "Verin",
+    inspiredBy: "Sekushi No. 7",
+    inspiredByBrand: "Lengling",
     mood: "refined",
     noteSummary: "Leather • Woods • Musk",
     emotion: "Tailored and warm.",
-    feeling:
-      "Verin is soft leather over cedar and a clean musk — the scent of a well-cut coat.",
+    feeling: "Verin is soft leather over cedar and a clean musk — the scent of a well-cut coat.",
     bestFor: "Daily wear",
     intensity: "Medium",
     personality: "Distinguished & Composed",
@@ -517,6 +478,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "opulent-odyssey",
     name: "Opulent Odyssey",
+    inspiredBy: "Ani X",
+    inspiredByBrand: "Nishane",
     mood: "refined",
     noteSummary: "Vanilla • Ginger • Woods",
     emotion: "Warmth with structure.",
@@ -538,6 +501,7 @@ const oilSeeds: OilSeed[] = [
   {
     id: "tangier-twilight",
     name: "Tangier Twilight",
+    inspiredBy: "Brompton Immortals",
     mood: "distinguished",
     noteSummary: "Tobacco • Woods • Amber",
     emotion: "A worn-in evening.",
@@ -559,6 +523,8 @@ const oilSeeds: OilSeed[] = [
   {
     id: "majestic-oud",
     name: "Majestic Oud",
+    inspiredBy: "Alexandria II",
+    inspiredByBrand: "Xerjoff",
     mood: "distinguished",
     noteSummary: "Oud • Rose • Amber",
     emotion: "Ceremonial warmth.",
@@ -584,6 +550,7 @@ function oilToProduct(seed: OilSeed): Product {
     id: seed.id,
     name: seed.name,
     inspiredBy: seed.inspiredBy,
+    inspiredByBrand: seed.inspiredByBrand,
     tagline: seed.feeling,
     price: 6800,
     image: seed.image,
@@ -599,8 +566,7 @@ function oilToProduct(seed: OilSeed): Product {
     feeling: seed.feeling,
     notes: seed.notes,
     composition: "30ml roll-on perfume oil in amber glass, hand-poured in Nairobi.",
-    ritual:
-      "Apply at pulse points after the body oil — let the warmth carry it through the day.",
+    ritual: "Apply at pulse points after the body oil — let the warmth carry it through the day.",
     story: seed.feeling,
     availableIn: seed.availableIn,
     bestseller: seed.bestseller,
@@ -609,6 +575,175 @@ function oilToProduct(seed: OilSeed): Product {
 }
 
 const oilProducts: Product[] = oilSeeds.map(oilToProduct);
+
+export type CatalogOnlyFragrance = {
+  id: string;
+  name: string;
+  inspiredBy: string;
+  inspiredByBrand: string;
+  catalogOnly: true;
+};
+
+export const catalogOnlyFragrances: CatalogOnlyFragrance[] = [
+  {
+    id: "sunday-in-florence",
+    name: "Sunday in Florence",
+    inspiredBy: "Aura Pink Magnolia",
+    inspiredByBrand: "Loewe",
+    catalogOnly: true,
+  },
+  {
+    id: "marrakech-muse",
+    name: "Marrakech Muse",
+    inspiredBy: "Fétiche Le Cuir",
+    inspiredByBrand: "Christian Louboutin",
+    catalogOnly: true,
+  },
+  {
+    id: "green-silk",
+    name: "Green Silk",
+    inspiredBy: "Angélique Noire",
+    inspiredByBrand: "Guerlain",
+    catalogOnly: true,
+  },
+  {
+    id: "midnight-in-monaco",
+    name: "Midnight in Monaco",
+    inspiredBy: "Explicite",
+    inspiredByBrand: "Ex Nihilo",
+    catalogOnly: true,
+  },
+  {
+    id: "elan",
+    name: "Élan",
+    inspiredBy: "Aventus for Her",
+    inspiredByBrand: "Creed",
+    catalogOnly: true,
+  },
+  {
+    id: "caedor",
+    name: "Caedor",
+    inspiredBy: "Hacivat X",
+    inspiredByBrand: "Nishane",
+    catalogOnly: true,
+  },
+  {
+    id: "midnight-muse",
+    name: "Midnight Muse",
+    inspiredBy: "Muse",
+    inspiredByBrand: "YSL",
+    catalogOnly: true,
+  },
+  {
+    id: "love-always",
+    name: "Love, Always",
+    inspiredBy: "Baciami",
+    inspiredByBrand: "Bvlgari",
+    catalogOnly: true,
+  },
+  {
+    id: "velisse",
+    name: "Velisse",
+    inspiredBy: "Miss Dior Blooming Bouquet",
+    inspiredByBrand: "Dior",
+    catalogOnly: true,
+  },
+  {
+    id: "savannah-bloom",
+    name: "Savannah Bloom",
+    inspiredBy: "Wild Vetiver",
+    inspiredByBrand: "Creed",
+    catalogOnly: true,
+  },
+  {
+    id: "ravelle",
+    name: "Ravelle",
+    inspiredBy: "La Capitale",
+    inspiredByBrand: "Xerjoff",
+    catalogOnly: true,
+  },
+  {
+    id: "capri-escape",
+    name: "Capri Escape",
+    inspiredBy: "Blue Talisman",
+    inspiredByBrand: "Ex Nihilo",
+    catalogOnly: true,
+  },
+  {
+    id: "zaria",
+    name: "Zaria",
+    inspiredBy: "Angels' Share Paradis",
+    inspiredByBrand: "Kilian",
+    catalogOnly: true,
+  },
+  {
+    id: "seventh-heaven",
+    name: "Seventh Heaven",
+    inspiredBy: "Existence",
+    inspiredByBrand: "Amouage",
+    catalogOnly: true,
+  },
+  {
+    id: "atlas-affair",
+    name: "Atlas Affair",
+    inspiredBy: "Cedrus Intense",
+    inspiredByBrand: "Chloé",
+    catalogOnly: true,
+  },
+  {
+    id: "amber-elegance",
+    name: "Amber Elegance",
+    inspiredBy: "Baccarat Rouge 540",
+    inspiredByBrand: "Maison Francis Kurkdjian",
+    catalogOnly: true,
+  },
+];
+
+const fragranceCatalogueOrder = [
+  "velvet-elegance",
+  "whispering-petals",
+  "carmine-temptations",
+  "riviera-dreams",
+  "nahla",
+  "tangier-twilight",
+  "thea",
+  "sensual-whispers",
+  "cipher",
+  "griselle",
+  "sunday-in-florence",
+  "marrakech-muse",
+  "green-silk",
+  "midnight-in-monaco",
+  "verin",
+  "elan",
+  "caedor",
+  "midnight-muse",
+  "love-always",
+  "velisse",
+  "savannah-bloom",
+  "opulent-odyssey",
+  "ravelle",
+  "capri-escape",
+  "zaria",
+  "seventh-heaven",
+  "atlas-affair",
+  "alina",
+  "lyra",
+  "samara",
+  "majestic-oud",
+  "zafira",
+  "amber-elegance",
+];
+
+export const fragranceCatalogue = fragranceCatalogueOrder.map((id) => {
+  const product = oilProducts.find((oil) => oil.id === id);
+  if (product) return product;
+
+  const catalogEntry = catalogOnlyFragrances.find((fragrance) => fragrance.id === id);
+  if (catalogEntry) return catalogEntry;
+
+  throw new Error(`Fragrance catalogue entry "${id}" has no product data.`);
+});
 
 // ---------- Discovery Sets ----------
 
@@ -749,8 +884,7 @@ export const rituals: Ritual[] = [
     mood: "warm",
     moodLabel: "Warm & Indulgent",
     tagline: "Soft lychee and rose, layered slowly.",
-    story:
-      "Alina's complete four-step ritual — graceful, daylight-soft, never loud.",
+    story: "Alina's complete four-step ritual — graceful, daylight-soft, never loud.",
     image: nahlaImg,
     price: 12800,
     steps: [
@@ -828,6 +962,7 @@ const ritualProducts: Product[] = rituals.map((r) => {
     id: r.id,
     name: r.name,
     inspiredBy: scent.inspiredBy,
+    inspiredByBrand: scent.inspiredByBrand,
     tagline: r.tagline,
     price: r.price,
     image: r.image,
@@ -853,11 +988,7 @@ const ritualProducts: Product[] = rituals.map((r) => {
   };
 });
 
-export const products: Product[] = [
-  ...discoverySets,
-  ...ritualProducts,
-  ...oilProducts,
-];
+export const products: Product[] = [...discoverySets, ...ritualProducts, ...oilProducts];
 
 // ---------- Selectors ----------
 

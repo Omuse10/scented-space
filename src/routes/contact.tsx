@@ -57,8 +57,7 @@ function ContactPage() {
         align="left"
         title={
           <>
-            Tell us where{" "}
-            <span className="serif-italic text-gold">you are.</span>
+            Tell us where <span className="serif-italic text-gold">you are.</span>
           </>
         }
         intro="Every message is read by a person. Whichever door suits you — we'll reply slowly and well."
@@ -85,9 +84,7 @@ function ContactPage() {
                 transition={{ duration: 0.7, delay: i * 0.08, ease: "easeOut" }}
                 className="group block border-t border-brown/15 pt-6 hover:border-terracotta transition-colors"
               >
-                <span className="eyebrow text-gold text-[0.625rem]">
-                  {c.eyebrow}
-                </span>
+                <span className="eyebrow text-gold text-[0.625rem]">{c.eyebrow}</span>
                 <h2
                   className="text-brown text-3xl md:text-4xl mt-3"
                   style={{ fontFamily: "var(--font-display)" }}
@@ -106,8 +103,8 @@ function ContactPage() {
             <div>
               <span className="eyebrow text-brown/55">The Atelier</span>
               <p className="mt-3 leading-relaxed">
-                Nairobi · Kenya — by appointment only. We'll arrange the address
-                with you on WhatsApp.
+                Nairobi · Kenya — by appointment only. We'll arrange the address with you on
+                WhatsApp.
               </p>
             </div>
             <div>

@@ -40,9 +40,9 @@ export function AboutTeaser() {
             About The <span className="serif-italic">Scented Space.</span>
           </h2>
           <p className="mt-7 text-brown/75 leading-[1.85] md:text-lg max-w-xl">
-            We believe fragrance lives best on prepared skin. Every product is composed slowly,
-            in small batches, to be layered — cleanse, hydrate, seal, scent — so the trail you
-            leave is quietly, unmistakably yours.
+            We believe fragrance lives best on prepared skin. Every product is composed slowly, in
+            small batches, to be layered — cleanse, hydrate, seal, scent — so the trail you leave is
+            quietly, unmistakably yours.
           </p>
           <Link
             to="/about"

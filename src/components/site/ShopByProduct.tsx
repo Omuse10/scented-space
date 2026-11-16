@@ -57,7 +57,9 @@ export function ShopByProduct() {
         <div className="text-center mb-10 md:mb-16 lg:mb-20">
           <div className="flex items-center justify-center gap-3 mb-4">
             <span className="h-px w-6 md:w-8 bg-gold/60" />
-            <span className="eyebrow text-[0.65rem] md:text-[0.7rem] text-gold tracking-[0.3em]">Shop By Product</span>
+            <span className="eyebrow text-[0.65rem] md:text-[0.7rem] text-gold tracking-[0.3em]">
+              Shop By Product
+            </span>
             <span className="h-px w-6 md:w-8 bg-gold/60" />
           </div>
           <h2
@@ -86,7 +88,9 @@ export function ShopByProduct() {
                   ? "relative before:content-[''] before:block before:h-px before:bg-gold/30 before:mx-4 before:mb-1 lg:before:hidden "
                   : "") +
                 // Last card spans both columns on desktop (5 cards → 2/2/1 centered)
-                (i === cards.length - 1 ? "lg:col-span-2 lg:max-w-[620px] lg:mx-auto lg:w-full" : "")
+                (i === cards.length - 1
+                  ? "lg:col-span-2 lg:max-w-[620px] lg:mx-auto lg:w-full"
+                  : "")
               }
             >
               <div className="group relative overflow-hidden rounded-2xl ring-1 ring-gold/20 shadow-[0_6px_24px_-16px_rgba(60,30,15,0.35)] transition-all duration-700 hover:ring-gold/40 hover:shadow-[0_12px_36px_-16px_rgba(60,30,15,0.5)]">
@@ -121,7 +125,9 @@ export function ShopByProduct() {
                       >
                         {card.title}
                       </h3>
-                      <p className="mt-1.5 serif-italic text-gold text-[0.95rem] lg:text-[1.1rem]">{card.subtitle}</p>
+                      <p className="mt-1.5 serif-italic text-gold text-[0.95rem] lg:text-[1.1rem]">
+                        {card.subtitle}
+                      </p>
                       <p className="mt-3 hidden sm:block text-ivory/75 text-[0.95rem] leading-relaxed max-w-sm">
                         {card.description}
                       </p>
@@ -138,7 +144,11 @@ export function ShopByProduct() {
                           fill="none"
                           className="transition-transform duration-500 group-hover:translate-x-1"
                         >
-                          <path d="M0 5h20m0 0L16 1m4 4l-4 4" stroke="currentColor" strokeWidth="1.25" />
+                          <path
+                            d="M0 5h20m0 0L16 1m4 4l-4 4"
+                            stroke="currentColor"
+                            strokeWidth="1.25"
+                          />
                         </svg>
                       </Link>
                     </div>
@@ -152,7 +162,11 @@ export function ShopByProduct() {
                     className="absolute bottom-10 right-5 lg:bottom-14 lg:right-12 w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-ivory/60 backdrop-blur-[2px] bg-cocoa/20 grid place-items-center text-ivory transition-all duration-500 hover:bg-ivory hover:border-ivory hover:text-cocoa hover:rotate-[-45deg]"
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                      <path d="M5 12h14m0 0l-5-5m5 5l-5 5" stroke="currentColor" strokeWidth="1.25" />
+                      <path
+                        d="M5 12h14m0 0l-5-5m5 5l-5 5"
+                        stroke="currentColor"
+                        strokeWidth="1.25"
+                      />
                     </svg>
                   </Link>
                 </div>

@@ -41,8 +41,7 @@ function BodyLotionPage() {
         eyebrow="Body Lotion"
         title={
           <>
-            Lightweight daily{" "}
-            <span className="serif-italic text-gold">moisture.</span>
+            Lightweight daily <span className="serif-italic text-gold">moisture.</span>
           </>
         }
         intro="Fast-absorbing hydration that layers beautifully under perfume oil. For daytime, warm weather, and skin that wants to feel soft without weight."
@@ -104,10 +103,7 @@ function BodyLotionCard({ p, delay }: { p: Product; delay: number }) {
           </span>
         )}
       </Link>
-      <h3
-        className="text-brown text-xl md:text-2xl"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
+      <h3 className="text-brown text-xl md:text-2xl" style={{ fontFamily: "var(--font-display)" }}>
         <Link
           to="/shop/$productId"
           params={{ productId: p.id }}
@@ -119,12 +115,11 @@ function BodyLotionCard({ p, delay }: { p: Product; delay: number }) {
       {p.inspiredBy && (
         <p className="text-brown/50 text-xs mt-1 serif-italic">
           Inspired by {p.inspiredBy}
+          {p.inspiredByBrand && ` — ${p.inspiredByBrand}`}
         </p>
       )}
       <p className="text-brown/65 text-sm mt-2 serif-italic">{p.noteSummary}</p>
-      <p className="mt-4 text-brown/80 text-sm tracking-wider">
-        KSh {p.price.toLocaleString()}
-      </p>
+      <p className="mt-4 text-brown/80 text-sm tracking-wider">KSh {p.price.toLocaleString()}</p>
     </motion.article>
   );
 }

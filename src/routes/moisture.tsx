@@ -7,12 +7,7 @@ const options = [
   {
     title: "Body Lotion",
     intro: "For lightweight daily moisture.",
-    bestFor: [
-      "Daytime use",
-      "Quick absorption",
-      "Warm weather",
-      "A soft, smooth finish",
-    ],
+    bestFor: ["Daytime use", "Quick absorption", "Warm weather", "A soft, smooth finish"],
     cta: "Shop Body Lotion",
     to: "/body-lotion" as const,
     image: lotionImg,
@@ -20,12 +15,7 @@ const options = [
   {
     title: "Body Butter",
     intro: "For richer, deeper moisture.",
-    bestFor: [
-      "Dry skin",
-      "Night-time use",
-      "Longer-lasting softness",
-      "A velvety finish",
-    ],
+    bestFor: ["Dry skin", "Night-time use", "Longer-lasting softness", "A velvety finish"],
     cta: "Shop Body Butter",
     to: "/body-butter" as const,
     image: butterImg,
@@ -63,8 +53,7 @@ function MoisturePage() {
             <span className="hairline" />
           </div>
           <h1 className="display-xl text-brown">
-            Choose Your{" "}
-            <span className="serif-italic text-gold">Moisture</span>
+            Choose Your <span className="serif-italic text-gold">Moisture</span>
           </h1>
         </div>
 

@@ -22,7 +22,10 @@ export function ScentPreviewCompact({ product }: { product: Product }) {
         <Dots level={product.intensity} />
       </span>
       <span className="text-brown/25">·</span>
-      <span><span className="text-brown/45">Best for</span> <span className="text-brown/75 normal-case tracking-normal">{product.bestFor}</span></span>
+      <span>
+        <span className="text-brown/45">Best for</span>{" "}
+        <span className="text-brown/75 normal-case tracking-normal">{product.bestFor}</span>
+      </span>
     </div>
   );
 }
@@ -30,10 +33,29 @@ export function ScentPreviewCompact({ product }: { product: Product }) {
 export function ScentPreview({ product }: { product: Product }) {
   const rows: [string, React.ReactNode][] = [
     ["Mood", <span className="text-brown/85">{product.moodLabel}</span>],
-    ["Intensity", <span className="inline-flex items-center gap-3"><Dots level={product.intensity} /><span className="text-brown/65 text-sm normal-case tracking-normal">{product.intensity}</span></span>],
-    ["Best for", <span className="text-brown/85 normal-case tracking-normal">{product.bestFor}</span>],
-    ["Personality", <span className="text-brown/85 normal-case tracking-normal serif-italic">{product.personality}</span>],
-    ["Pairs with", <span className="text-brown/85 normal-case tracking-normal">{product.pairsWith}</span>],
+    [
+      "Intensity",
+      <span className="inline-flex items-center gap-3">
+        <Dots level={product.intensity} />
+        <span className="text-brown/65 text-sm normal-case tracking-normal">
+          {product.intensity}
+        </span>
+      </span>,
+    ],
+    [
+      "Best for",
+      <span className="text-brown/85 normal-case tracking-normal">{product.bestFor}</span>,
+    ],
+    [
+      "Personality",
+      <span className="text-brown/85 normal-case tracking-normal serif-italic">
+        {product.personality}
+      </span>,
+    ],
+    [
+      "Pairs with",
+      <span className="text-brown/85 normal-case tracking-normal">{product.pairsWith}</span>,
+    ],
   ];
   return (
     <div className="border-t border-b border-brown/15 divide-y divide-brown/10">

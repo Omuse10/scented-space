@@ -55,11 +55,7 @@ export function Bestsellers({ variant = "grid" }: { variant?: "grid" | "carousel
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.6, delay: i * 0.06, ease: "easeOut" }}
               >
-                <Link
-                  to="/shop/$productId"
-                  params={{ productId: p.id }}
-                  className="group block"
-                >
+                <Link to="/shop/$productId" params={{ productId: p.id }} className="group block">
                   <div className="relative overflow-hidden bg-ivory aspect-[4/5] mb-3 md:mb-4">
                     <img
                       src={p.image}
@@ -102,7 +98,6 @@ function Coverflow({ items }: { items: CoverItem[] }) {
     containScroll: false,
     startIndex: initialIndex,
     duration: 60,
-    draggable: true,
     dragFree: false,
     dragThreshold: 6,
     skipSnaps: false,
@@ -177,34 +172,34 @@ function Coverflow({ items }: { items: CoverItem[] }) {
                     pointerEvents: "auto" as const,
                   }
                 : distance === 1
-                ? {
-                    basis: "basis-[26%] sm:basis-[26%] md:basis-[26%] lg:basis-[26%]",
-                    margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
-                    opacity: 1,
-                    zIndex: 5,
-                    blur: 0.5,
-                    brightness: 0.9,
-                    pointerEvents: "auto" as const,
-                  }
-                : distance === 2
-                ? {
-                    basis: "basis-[18%] sm:basis-[18%] md:basis-[18%] lg:basis-[18%]",
-                    margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
-                    opacity: 1,
-                    zIndex: 1,
-                    blur: 2,
-                    brightness: 0.75,
-                    pointerEvents: "auto" as const,
-                  }
-                : {
-                    basis: "basis-[18%] sm:basis-[18%] md:basis-[18%] lg:basis-[18%]",
-                    margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
-                    opacity: 0,
-                    zIndex: 0,
-                    blur: 0,
-                    brightness: 1,
-                    pointerEvents: "none" as const,
-                  };
+                  ? {
+                      basis: "basis-[26%] sm:basis-[26%] md:basis-[26%] lg:basis-[26%]",
+                      margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
+                      opacity: 1,
+                      zIndex: 5,
+                      blur: 0.5,
+                      brightness: 0.9,
+                      pointerEvents: "auto" as const,
+                    }
+                  : distance === 2
+                    ? {
+                        basis: "basis-[18%] sm:basis-[18%] md:basis-[18%] lg:basis-[18%]",
+                        margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
+                        opacity: 1,
+                        zIndex: 1,
+                        blur: 2,
+                        brightness: 0.75,
+                        pointerEvents: "auto" as const,
+                      }
+                    : {
+                        basis: "basis-[18%] sm:basis-[18%] md:basis-[18%] lg:basis-[18%]",
+                        margin: "-mr-[8%] sm:-mr-[8%] md:-mr-[8%] lg:-mr-[8%]",
+                        opacity: 0,
+                        zIndex: 0,
+                        blur: 0,
+                        brightness: 1,
+                        pointerEvents: "none" as const,
+                      };
 
             return (
               <li
@@ -213,7 +208,10 @@ function Coverflow({ items }: { items: CoverItem[] }) {
                 style={{
                   opacity: config.opacity,
                   zIndex: config.zIndex,
-                  filter: config.blur === 0 ? "none" : `blur(${config.blur}px) saturate(0.9) brightness(${config.brightness})`,
+                  filter:
+                    config.blur === 0
+                      ? "none"
+                      : `blur(${config.blur}px) saturate(0.9) brightness(${config.brightness})`,
                   pointerEvents: config.pointerEvents,
                 }}
               >
